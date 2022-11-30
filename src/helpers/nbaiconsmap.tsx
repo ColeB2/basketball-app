@@ -1,0 +1,35 @@
+import * as NBAIcons from 'react-nba-logos';
+
+const NBAIconsMap : {[abbrev: string]: JSX.Element} = {
+    "ATL": <NBAIcons.ATL size="20"/>,
+    "BKN": <NBAIcons.BKN size="20"/>,
+    "BOS": <NBAIcons.BOS size="20"/>,
+    "CHA": <NBAIcons.CHA size="20"/>,
+    "CHI": <NBAIcons.CHI size="20"/>,
+    "CLE": <NBAIcons.CLE size="20"/>,
+    "DAL": <NBAIcons.DAL size="20"/>,
+    "DEN": <NBAIcons.DEN size="20"/>,
+    "DET": <NBAIcons.DET size="20"/>,
+    "GSW": <NBAIcons.GSW size="20"/>,
+    "HOU": <NBAIcons.HOU size="20"/>,
+    "IND": <NBAIcons.IND size="20"/>,
+    "LAC": <NBAIcons.LAC size="20"/>,
+    "LAL": <NBAIcons.LAL size="20"/>,
+    "MEM": <NBAIcons.MEM size="20"/>,
+    "MIA": <NBAIcons.MIA size="20"/>,
+    "MIL": <NBAIcons.MIL size="20"/>,
+    "MIN": <NBAIcons.MIN size="20"/>,
+    "NOP": <NBAIcons.NOP size="20"/>,
+    "NYK": <NBAIcons.NYK size="20"/>,
+    "OKC": <NBAIcons.OKC size="20"/>,
+    "ORL": <NBAIcons.ORL size="20"/>,
+    "PHI": <NBAIcons.PHI size="20"/>,
+    "PHX": <NBAIcons.PHX size="20"/>,
+    "POR": <NBAIcons.POR size="20"/>,
+    "SAC": <NBAIcons.SAC size="20"/>,
+    "SAS": <NBAIcons.SAS size="20"/>,
+    "TOR": <NBAIcons.TOR size="20"/>,
+    "UTA": <NBAIcons.UTA size="20"/>,
+    "WAS": <NBAIcons.WAS size="20"/>
+}
+export default NBAIconsMap

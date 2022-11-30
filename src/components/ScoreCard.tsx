@@ -1,6 +1,7 @@
 import React from "react";
 
 import {teamObject} from '../types/basketballdata'
+import NBAIconsMap from '../helpers/nbaiconsmap'
 
 interface ScoreCardProps {
     date: Date;
@@ -17,6 +18,7 @@ interface ScoreCardProps {
     handleClick?: Function;
 }
 
+
 const ScoreCard = (props: ScoreCardProps) => (
     <table className="card">
         <thead>
@@ -27,10 +29,16 @@ const ScoreCard = (props: ScoreCardProps) => (
         </thead>
         <tbody>
             <tr>
+                <td>
+                    {NBAIconsMap[props.visitor_team.abbreviation]}
+                </td>
                 <td>{props.visitor_team.abbreviation}</td>
                 <td className="text-end">{props.visitor_team_score}</td>
             </tr>
             <tr>
+                <td>
+                    {NBAIconsMap[props.home_team.abbreviation]}
+                </td>
                 <td>{props.home_team.abbreviation}</td>
                 <td className="text-end">{props.home_team_score}</td>
             </tr>
