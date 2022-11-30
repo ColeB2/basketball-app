@@ -20,29 +20,31 @@ interface ScoreCardProps {
 
 
 const ScoreCard = (props: ScoreCardProps) => (
-    <table className="card">
-        <thead>
-            <tr>
-                <th colSpan={2}><a>{props.time}</a></th>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    {NBAIconsMap[props.visitor_team.abbreviation]}
-                </td>
-                <td>{props.visitor_team.abbreviation}</td>
-                <td className="text-end">{props.visitor_team_score}</td>
-            </tr>
-            <tr>
-                <td>
-                    {NBAIconsMap[props.home_team.abbreviation]}
-                </td>
-                <td>{props.home_team.abbreviation}</td>
-                <td className="text-end">{props.home_team_score}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div className="card">
+        <table className="card-table">
+            <thead className="card-table-head">
+                <tr className="card-table-row">
+                    <th colSpan={2} className="status">{props.time ? props.time : props.status}</th>
+                    {/* <td></td> */}
+                </tr>
+            </thead>
+            <tbody className="">
+                <tr className="card-table-row">
+                    <td className="team-icon">
+                        {NBAIconsMap[props.visitor_team.abbreviation]}
+                    </td>
+                    <td className="team-abbr">{props.visitor_team.abbreviation}</td>
+                    <td className="team-score">{props.visitor_team_score}</td>
+                </tr>
+                <tr className="card-table-row">
+                    <td className="team-icon">
+                        {NBAIconsMap[props.home_team.abbreviation]}
+                    </td>
+                    <td className="team-abbr">{props.home_team.abbreviation}</td>
+                    <td className="team-score">{props.home_team_score}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 )
 export default ScoreCard;
