@@ -76,7 +76,6 @@ interface CarouselProps {
 const Carousel = ({data, meta, handleClick}: CarouselProps) => (
     data &&
     <div className="">
-        <h5>Title</h5>
         <Swiper
             modules={[Navigation, Pagination]}
             direction={'horizontal'}
