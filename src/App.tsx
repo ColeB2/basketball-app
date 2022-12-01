@@ -34,7 +34,7 @@ function App() {
   }, [])
 
   // console.log('here', date, dateStr)
-  console.log("test",test)
+  console.log("test",test.data)
   console.log("todaystats", todayStats)
   test.data && todayStats.data && console.log("testy", ...test.data, ...todayStats.data)
   // let combinedData = [...test.data, ...todayStats.data]

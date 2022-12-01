@@ -20,6 +20,7 @@ body, html, #root {
   border: 1px solid lightgray;
   margin: 0;
   padding: 0;
+  width: 165px;
 }
 
 /* Swiper css */
@@ -41,29 +42,28 @@ background-color: rgb(215,215,215);
 .team-icon {
   padding: 0px;
   margin: 0px;
+  width: 10px;
 }
 
 .team-abbr {
   padding: 0px;
   margin: 0px;
+  width: 40px;
 }
 .team-score {
   /* border: 1px solid black; */
+  /* width: 50px; */
+  text-align: end;
 }
-table {
+/* table {
   border: 2px solid yellowgreen;
   width: 100% !important;
-  /* table-layout: fixed;
-  width: 150px; */
-}
+} */
 
-table, th, td {
-  border: 2px solid cyan;
-}
 
 
 .card-table {
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
   width: 100%;
 }
 

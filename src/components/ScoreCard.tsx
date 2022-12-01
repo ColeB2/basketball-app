@@ -4,6 +4,7 @@ import {teamObject} from '../types/basketballdata'
 import NBAIconsMap from '../helpers/nbaiconsmap'
 
 interface ScoreCardProps {
+    dateObj?: boolean;
     date: Date;
     home_team: teamObject;
     home_team_score: number;
@@ -19,12 +20,13 @@ interface ScoreCardProps {
 }
 
 
+
 const ScoreCard = (props: ScoreCardProps) => (
     <div className="card">
         <table className="card-table">
             <thead className="card-table-head">
                 <tr className="card-table-row">
-                    <th colSpan={2} className="status">{props.time ? props.time : props.status}</th>
+                    <th colSpan={3} className="status">{props.time ? props.time : props.status}</th>
                     {/* <td></td> */}
                 </tr>
             </thead>
