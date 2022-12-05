@@ -16,16 +16,15 @@ interface ScoreCardProps {
     time: string;
     visitor_team: teamObject;
     visitor_team_score: number;
-    handleClick?: Function;
+    handleClick: React.MouseEventHandler;
 }
 
 const ScoreCard = (props: ScoreCardProps) => (
-    <div className="card">
+    <div className="card" onClick={props.handleClick}>
         <table className="card-table">
             <thead className="card-table-head">
                 <tr className="card-table-row">
                     <th colSpan={3} className="status">{props.time ? props.time : props.status}</th>
-                    {/* <td></td> */}
                 </tr>
             </thead>
             <tbody className="">

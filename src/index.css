@@ -83,8 +83,14 @@ background-color: rgb(215,215,215);
 }
 
 .date-card {
-  height: auto;
   background-color: lightgray;
-  
+  /* height: auto; */
+  height: 88px;
+}
+
+.date-card-table {
+  /* fix hard coding? */
+  height: 88px;
+  /* height: 100%; */
 }
 

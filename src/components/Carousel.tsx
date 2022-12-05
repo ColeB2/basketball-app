@@ -20,12 +20,12 @@ import {teamObject, basketballData} from '../types/basketballdata'
 interface CarouselProps {
     data: basketballData[];
     meta?: Object;
-    handleClick?: Function;
+    handleClick: Function;
 }
 
 const Carousel = ({data, meta, handleClick}: CarouselProps) => (
     data &&
-    <div className="">
+    <div className="carousel-container">
         <Swiper
             modules={[Navigation, Pagination]}
             direction={'horizontal'}
@@ -45,13 +45,15 @@ const Carousel = ({data, meta, handleClick}: CarouselProps) => (
         >
             {
                 data.map((item, idx: number) => {
-                    {console.log("Carousel data.map, item", item)}
                     return (
                         <SwiperSlide key={idx}>
+                            
                             {   item.dateObj ? <DateCard data={item}/> :
                                 <ScoreCard
                                     key={item.id}
-                                    handleClick={handleClick}
+                                    handleClick={
+                                        () => handleClick(item.id)
+                                    }
                                     {...item}
                                 />
                             }
