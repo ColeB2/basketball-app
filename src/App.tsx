@@ -5,7 +5,7 @@ import './App.css';
 import BoxScore from './components/BoxScore';
 import Carousel from './components/Carousel';
 import emptyDateObject from './types/basketballdata'; 
-import {basketballDataType, basketballData} from './types/basketballdata'
+import {basketballDataType, basketballData, boxscoreDataType} from './types/basketballdata'
 import axios from "axios";
 
 
@@ -14,12 +14,10 @@ const baseGameURL = "https://www.balldontlie.io/api/v1/stats?per_page=100&game_i
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  // const [test, setTest] = useState([{}]);
   const [test, setTest] = useState<basketballDataType>({} as basketballDataType);
   const [todayStats, setTodayStats] = useState<basketballDataType>({} as basketballDataType);
-  const [currentGameID, setCurrentGameID] = useState<number>(0 as number)
+  const [currentGameID, setCurrentGameID] = useState<number>(0);
+  const [currentGameData, setCurrentGameData] = useState<boxscoreDataType>({} as boxscoreDataType)
 
   const date = new Date();
   date.setDate(date.getDate() - 1);
@@ -52,19 +50,37 @@ function App() {
     })
   }, [])
 
+
+  // current Game Boxscore data --> updates when gameId changes.
   useEffect(() => {
+    console.log("CURRENTGAMEID CHANGES", currentGameID)
     axios.get(baseGameURL + currentGameID.toString()).then((response) => {
-      console.log(response.data)
+      // const boxScoreData = response.data
+      // console.log("boxScoreData", boxScoreData)
+      // if (boxScoreData.data.length !== 0) {
+      //   const home_team_id = boxScoreData.data[0].game.home_team_id
+      //   const away_team_id = boxScoreData.data[0].game.visitor_team_id
+      //   console.log(home_team_id, away_team_id, boxScoreData)
+      // }
+      console.log("runnin her")
+      setCurrentGameData(response.data)
+      // setCurrentGameData(boxScoreData)
+      console.log('reacher hurr')
     })
   }, [currentGameID])
+
 
   
 
 
   function selectGameClick(id: number) {
-    console.log('Click', id)
     setCurrentGameID(id)
+    console.log('typeof id', typeof(id))
+    console.log('Post Click gameId', currentGameID, id)
   }
+
+  console.log('ID CHANGED', currentGameID)
+  console.log(test.data)
 
 
 
@@ -82,7 +98,11 @@ function App() {
       />
     }
 
-    <BoxScore/>
+    {
+      currentGameData && currentGameID !== 0 &&
+      <BoxScore {...currentGameData}/>
+    }
+    
     </div>
   )
 }
