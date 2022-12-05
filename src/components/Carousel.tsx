@@ -13,23 +13,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import ScoreCard from "./ScoreCard"
-import {teamObject} from '../types/basketballdata'
+import DateCard from "./DateCard";
+import {teamObject, basketballData} from '../types/basketballdata'
 
 // extend apibasketballData?
 interface CarouselProps {
-    data: {
-        date: Date;
-        home_team: teamObject;
-        home_team_score: number;
-        id: number;
-        period: number;
-        postseason: boolean;
-        season: number;
-        status: string;
-        time: string;
-        visitor_team: teamObject;
-        visitor_team_score: number;
-    }[];
+    data: basketballData[];
     meta?: Object;
     handleClick?: Function;
 }
@@ -56,10 +45,10 @@ const Carousel = ({data, meta, handleClick}: CarouselProps) => (
         >
             {
                 data.map((item, idx: number) => {
-                    // {console.log("Carousel data.map, item", item)}
+                    {console.log("Carousel data.map, item", item)}
                     return (
                         <SwiperSlide key={idx}>
-                            {
+                            {   item.dateObj ? <DateCard data={item}/> :
                                 <ScoreCard
                                     key={item.id}
                                     handleClick={handleClick}

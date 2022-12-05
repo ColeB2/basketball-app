@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg';
 import './App.css';
 
 import Carousel from './components/Carousel';
-import {basketballDataType} from './types/basketballdata'
+import emptyDateObject from './types/basketballdata'; 
+import {basketballDataType, basketballData} from './types/basketballdata'
 import axios from "axios";
 
 const baseURL = "https://www.balldontlie.io/api/v1/games"
@@ -23,13 +24,28 @@ function App() {
   const todayStr = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
   useEffect(() => {
     axios.get(baseURL + "?dates[]=" + dateStr).then((response) => {
+      response.data.data.map((item: basketballData) => {
+        item.dateObj = false;
+      })
       setTest(response.data)
     })
   }, [])
 
   useEffect(() => {
     axios.get(baseURL + "?dates[]=" + todayStr).then((response) => {
+      response.data.data.map((item: basketballData) => {
+        item.dateObj = false;
+      })
+      // TODO Work on sorting Today game data by start time.
+      // Also work on implementing Time left in quarter.
+      // console.log('Testing sorting data',response.data)
+      // const todayData = [].concat(response.data.data)
+        // .sort((a,b) => a["status"] < b["status"] ? 1 : -1)
+      
       setTodayStats(response.data)
+      // response.data.data = todayData
+      // setTodayStats(response.data)
+      // console.log(todayData)
     })
   }, [])
 
@@ -43,6 +59,10 @@ function App() {
     console.log('haha')
   }
 
+  console.log('EMPTY DATE OBJECT', emptyDateObject)
+  let todayDateObj = Object.assign(emptyDateObject, {date:today})
+  console.log('BEST', todayDateObj)
+
 
   return (
     <div className="App">
@@ -50,7 +70,7 @@ function App() {
       <Carousel
         key={1}
         // data={test.data}
-        data={[...test.data, ...todayStats.data]}
+        data={[...test.data, todayDateObj, ...todayStats.data]}
         meta={test.meta}
         handleClick={handleClick}
       />

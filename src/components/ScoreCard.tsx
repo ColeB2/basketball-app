@@ -19,8 +19,6 @@ interface ScoreCardProps {
     handleClick?: Function;
 }
 
-
-
 const ScoreCard = (props: ScoreCardProps) => (
     <div className="card">
         <table className="card-table">

@@ -82,3 +82,9 @@ background-color: rgb(215,215,215);
   margin: 0px;
 }
 
+.date-card {
+  height: auto;
+  background-color: lightgray;
+  
+}
+
