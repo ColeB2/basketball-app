@@ -94,3 +94,7 @@ background-color: rgb(215,215,215);
   /* height: 100%; */
 }
 
+
+.boxscore-table {
+  border: 1px solid black;
+}

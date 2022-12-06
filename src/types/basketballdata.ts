@@ -26,6 +26,33 @@ interface basketballData {
   visitor_team_score: number;
 };
 
+// Data type used inside playerStatsDataType
+interface gameStatsDataType {
+  date: Date;
+  home_team_id: number
+  home_team_score: number;
+  id: number;
+  period: number;
+  postseason: boolean;
+  season: number;
+  status: string;
+  time: string;
+  visitor_team_id: number;
+  visitor_team_score: number;
+}
+
+interface playerInfoDataType {
+  first_name: string;
+  height_feet: number;
+  height_inches: number;
+  id: number;
+  last_name: string;
+  position: string;
+  team_id: number;
+  weight_pounds: number;
+
+}
+
 interface playerStatsDataType {
   id: number;
   ast: number;
@@ -47,44 +74,11 @@ interface playerStatsDataType {
   reb: number;
   stl: number;
   turnover: number;
-  player: Object;
-  game: Object;
-  team: Object;
-  
-
+  player: playerInfoDataType;
+  game: gameStatsDataType;
+  team: teamObject;
 }
-// {{
-//   "id":857701
-//   "date":"2022-12-04T00:00:00.000Z",
-//   "home_team_id":30,
-//   "home_team_score":119,
-//   "period":4,
-//   "postseason":false,
-//   "season":2022,
-//   "status":"Final",
-//   "time":
-//   "Final",
-//   "visitor_team_id":14,
-//   "visitor_team_score":130},
-//   "player":{
-//     "id":3547242,
-//     "first_name":"Deni",
-//     "height_feet":null,
-//     "height_inches":null,
-//     "last_name":"Avdija",
-//     "position":"F",
-//     "team_id":30,
-//     "weight_pounds":null},
-//     "pts":7,"reb":8,"stl":2,
-//     "team":{
-//       "id":30,
-//       "abbreviation":"WAS",
-//       "city":"Washington",
-//       "conference":"East",
-//       "division":"Southeast",
-//       "full_name":"Washington Wizards",
-//       "name":"Wizards"},
-//       "turnover":1},
+
 
 const emptyDateObject = {
   dateObj: true,
@@ -109,9 +103,13 @@ interface basketballDataType {
 
 interface boxscoreDataType {
   data: playerStatsDataType[];
-  meta: Object;
 }
 
 
-export type {basketballDataType, basketballData, boxscoreDataType, playerStatsDataType, teamObject};
+
+
+export type {
+  basketballDataType, basketballData, boxscoreDataType,playerStatsDataType,
+  teamObject
+};
 export default emptyDateObject;

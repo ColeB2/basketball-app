@@ -5,7 +5,9 @@ import './App.css';
 import BoxScore from './components/BoxScore';
 import Carousel from './components/Carousel';
 import emptyDateObject from './types/basketballdata'; 
-import {basketballDataType, basketballData, boxscoreDataType} from './types/basketballdata'
+import {
+  basketballDataType, basketballData, boxscoreDataType, playerStatsDataType
+} from './types/basketballdata'
 import axios from "axios";
 
 
@@ -17,7 +19,8 @@ function App() {
   const [test, setTest] = useState<basketballDataType>({} as basketballDataType);
   const [todayStats, setTodayStats] = useState<basketballDataType>({} as basketballDataType);
   const [currentGameID, setCurrentGameID] = useState<number>(0);
-  const [currentGameData, setCurrentGameData] = useState<boxscoreDataType>({} as boxscoreDataType)
+  const [homeTeamData, setHomeTeamData] = useState<boxscoreDataType>({} as boxscoreDataType)
+  const [awayTeamData, setAwayTeamData] = useState<boxscoreDataType>({} as boxscoreDataType)
 
   const date = new Date();
   date.setDate(date.getDate() - 1);
@@ -30,7 +33,7 @@ function App() {
         item.dateObj = false;
       })
       setTest(response.data)
-      console.log('rerunning')
+      console.log('Yesterdays Games Update')
     })
   }, [])
 
@@ -46,26 +49,26 @@ function App() {
         // .sort((a,b) => a["status"] < b["status"] ? 1 : -1)
       
       setTodayStats(response.data)
-      console.log('rerunning')
+      console.log('Todays Games Update')
     })
   }, [])
 
 
   // current Game Boxscore data --> updates when gameId changes.
   useEffect(() => {
-    console.log("CURRENTGAMEID CHANGES", currentGameID)
     axios.get(baseGameURL + currentGameID.toString()).then((response) => {
-      // const boxScoreData = response.data
-      // console.log("boxScoreData", boxScoreData)
-      // if (boxScoreData.data.length !== 0) {
-      //   const home_team_id = boxScoreData.data[0].game.home_team_id
-      //   const away_team_id = boxScoreData.data[0].game.visitor_team_id
-      //   console.log(home_team_id, away_team_id, boxScoreData)
-      // }
-      console.log("runnin her")
-      setCurrentGameData(response.data)
-      // setCurrentGameData(boxScoreData)
-      console.log('reacher hurr')
+      const boxScoreData = response.data
+      if (boxScoreData.data.length !== 0) {
+        const home_team_id = boxScoreData.data[0].game.home_team_id
+        const away_team_id = boxScoreData.data[0].game.visitor_team_id
+        const home_team = boxScoreData.data.filter(
+          (player: playerStatsDataType) => player.team.id === home_team_id)
+        const away_team = boxScoreData.data.filter(
+          (player: playerStatsDataType) => player.team.id === away_team_id)
+        console.log(home_team_id,  home_team,away_team_id, away_team)
+        setHomeTeamData(home_team)
+        setAwayTeamData(away_team)
+      }
     })
   }, [currentGameID])
 
@@ -79,8 +82,9 @@ function App() {
     console.log('Post Click gameId', currentGameID, id)
   }
 
-  console.log('ID CHANGED', currentGameID)
-  console.log(test.data)
+  // console.log('ID CHANGED', currentGameID)
+  // console.log(test.data)
+  console.log(homeTeamData, typeof(homeTeamData))
 
 
 
@@ -99,8 +103,12 @@ function App() {
     }
 
     {
-      currentGameData && currentGameID !== 0 &&
-      <BoxScore {...currentGameData}/>
+      currentGameID !== 0 && homeTeamData && 
+      <BoxScore data={homeTeamData}/> 
+    }
+    {
+      currentGameID !== 0 && awayTeamData && 
+      <BoxScore data={awayTeamData}/> 
     }
     
     </div>
