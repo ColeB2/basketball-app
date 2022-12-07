@@ -5,9 +5,9 @@ import {Navigation, Pagination} from 'swiper';
 
 // swiper bundle styles
 import 'swiper/css/bundle'
-
 // swiper core styles
 import 'swiper/css'
+import './Carousel.css'
 
 // modules styles
 import 'swiper/css/navigation'

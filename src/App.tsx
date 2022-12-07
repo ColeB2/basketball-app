@@ -92,25 +92,25 @@ function App() {
   let todayDateObj = Object.assign(emptyDateObject, {date:today})
   return (
     <div className="App">
-    {test.data && todayStats.data &&
-      <Carousel
-        key={1}
-        // data={test.data}
-        data={[...test.data, todayDateObj, ...todayStats.data]}
-        meta={test.meta}
-        handleClick={selectGameClick}
-      />
-    }
-
-    {
-      currentGameID !== 0 && homeTeamData && 
-      <BoxScore data={homeTeamData}/> 
-    }
-    {
-      currentGameID !== 0 && awayTeamData && 
-      <BoxScore data={awayTeamData}/> 
-    }
-    
+      {test.data && todayStats.data &&
+        <Carousel
+          key={1}
+          // data={test.data}
+          data={[...test.data, todayDateObj, ...todayStats.data]}
+          meta={test.meta}
+          handleClick={selectGameClick}
+        />
+      }
+      <div className="boxscore-containers">
+      {
+        currentGameID !== 0 && homeTeamData && 
+        <BoxScore data={homeTeamData}/> 
+      }
+      {
+        currentGameID !== 0 && awayTeamData && 
+        <BoxScore data={awayTeamData}/> 
+      }
+      </div>
     </div>
   )
 }

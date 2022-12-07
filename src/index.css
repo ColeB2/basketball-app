@@ -1,42 +1,10 @@
-* {
-  box-sizing: border-box;
-}
-
-body, html, #root {
-  font-family: "Arial", sans-serif;
-  margin: 0;
-  height: 100%;
-  /* background-color: black; */
-  /* background-color: white; */
-  /* background-color: #282D35; */
-}
-
-
-
-
 /* ScoreCard */
-.card {
+.score-card {
   cursor: pointer;
   border: 1px solid lightgray;
   margin: 0;
   padding: 0;
   width: 165px;
-}
-
-/* Swiper css */
-
-.swiper-slide {
-  width: auto;
-}
-
-.swiper-ticker-date {
-width: 80px;
-height: 100px;
-background-color: rgb(215,215,215);
-/*border-bottom: 2px solid gray;*/
-/*border-top: 2px solid gray;*/
-/*border-right: 2px solid gray;*/
-/*border-left: 2px solid gray;*/
 }
 
 .team-icon {
@@ -55,12 +23,6 @@ background-color: rgb(215,215,215);
   /* width: 50px; */
   text-align: end;
 }
-/* table {
-  border: 2px solid yellowgreen;
-  width: 100% !important;
-} */
-
-
 
 .card-table {
   /* border: 1px solid orange; */
@@ -85,16 +47,53 @@ background-color: rgb(215,215,215);
 .date-card {
   background-color: lightgray;
   /* height: auto; */
-  height: 88px;
+  height: 80px;
 }
 
 .date-card-table {
   /* fix hard coding? */
-  height: 88px;
+  height: 80px;
   /* height: 100%; */
 }
 
 
+/* 
+--------------
+Boxscore Table
+--------------
+*/
+.boxscore-container {
+  display: flexbox;
+  margin: auto;
+  justify-content: center;
+  /* width: 70%; */
+  /* width: 1280px; */
+  border: 1px solid chartreuse;
+}
+@media screen and (min-width: 1280px) {
+  .boxscore-container {width: 1280px;}
+}
+
+.boxscore-title {
+  text-align: center;
+}
+
 .boxscore-table {
-  border: 1px solid black;
+  width: 100%;
+  text-align: end;
+}
+
+.boxscore-table th:first-child,
+.boxscore-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
+  text-align: left;
+}
+
+
+td,th {
+  white-space: no-wrap;
+  overflow: hidden;
 }
