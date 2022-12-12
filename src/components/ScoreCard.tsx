@@ -3,6 +3,8 @@ import React from "react";
 import {teamObject} from '../types/basketballdata'
 import NBAIconsMap from '../helpers/nbaiconsmap'
 
+import './ScoreCard.css'
+
 interface ScoreCardProps {
     dateObj?: boolean;
     date: Date;

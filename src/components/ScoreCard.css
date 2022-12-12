@@ -1,0 +1,46 @@
+/* ScoreCard */
+.score-card {
+    cursor: pointer;
+    border: 1px solid lightgray;
+    margin: 0;
+    padding: 0;
+    width: 165px;
+  }
+  
+  .team-icon {
+    padding: 0px;
+    margin: 0px;
+    width: 10px;
+  }
+  
+  .team-abbr {
+    padding: 0px;
+    margin: 0px;
+    width: 40px;
+  }
+  .team-score {
+    /* border: 1px solid black; */
+    /* width: 50px; */
+    text-align: end;
+  }
+  
+  .card-table {
+    /* border: 1px solid orange; */
+    width: 100%;
+  }
+  
+  .card-table-head {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  .card-table-body {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  .card-table-row {
+    padding: 0px;
+    margin: 0px;
+  }
+  

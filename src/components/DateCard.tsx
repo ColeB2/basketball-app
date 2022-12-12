@@ -1,6 +1,7 @@
 import React from "react";
 
 import { basketballData } from "../types/basketballdata";
+import './DateCard.css'
 
 const months = [
     'JAN',
@@ -33,15 +34,7 @@ interface DateCardProps {
 
 const DateCard = ({data}: DateCardProps) => (
     data &&
-    // Works, but not proper.
-    // <div className="date-card">
-    //     <table>
-    //         <p>{days[data.date.getDay()]}</p>
-    //         <p>{months[data.date.getMonth()]}, {data.date.getDate()}</p> 
-    //     </table>
-    // </div>
-
-    //uses hardcoded 88px height for date-card-table
+    //uses hardcoded 8Xpx height for date-card-table
     <div className="date-card">
         <table className="date-card-table">
             <thead>

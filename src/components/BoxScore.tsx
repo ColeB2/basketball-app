@@ -2,6 +2,8 @@ import React from "react";
 
 import {playerStatsDataType} from '../types/basketballdata'
 
+import './BoxScore.css'
+
 interface BoxScoreProps {
     // data: playerStatsDataType[];
     data: any;
@@ -10,7 +12,6 @@ interface BoxScoreProps {
 
 const BoxScore = (props: BoxScoreProps) => {
     // const [tableData, setTableData] = useState(tableData)
-
     const columns = [
         {label: "First", accessor: "first_name", accessor2: "last_name",
             player: true
@@ -43,7 +44,6 @@ const BoxScore = (props: BoxScoreProps) => {
             {props.data[0].team.full_name}
         </h1>
         <table className="boxscore-table table table-striped table-hover">
-
             <thead>
                 <tr>
                     <th>
@@ -59,13 +59,8 @@ const BoxScore = (props: BoxScoreProps) => {
                         ) 
                         
                     })}
-                    {/* <th>Pts</th> */}
-                    {/* <th>Reb</th> */}
-                    {/* <th>Ast</th> */}
                 </tr>
             </thead>
-
-
             <tbody>
             {props.data.map((item: any,idx: number) => {
                 return (
@@ -90,19 +85,8 @@ const BoxScore = (props: BoxScoreProps) => {
                         })}
                     </tr>
                 );
-                        // <tr key={idx}>
-                        //     <td>
-                        //         {item.player.first_name} {item.player.last_name}
-                        //     </td>
-                        //     <td>{item.pts}</td>
-                        //     <td>{item.reb}</td>
-                        //     <td>{item.ast}</td>
-                        // </tr>
-                // );
             })}
             </tbody>
-
-
         </table>
     </div>
     )
