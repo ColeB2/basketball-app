@@ -1,0 +1,42 @@
+/* 
+--------------
+Boxscore Table
+--------------
+*/
+.boxscore-container {
+    display: flexbox;
+    margin: auto;
+    justify-content: center;
+  }
+  @media screen and (min-width: 1280px) {
+    .boxscore-container {width: 1280px;}
+  }
+  
+  .boxscore-title {
+    text-align: center;
+  }
+  
+  .boxscore-table {
+    width: 100%;
+    text-align: end;
+  }
+  
+  .boxscore-table th:first-child,
+  .boxscore-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+  }
+  
+  .boxscore-table tr{
+    height: 10px;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .boxscore-table td, .boxscore-table th {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }

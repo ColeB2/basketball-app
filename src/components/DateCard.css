@@ -1,0 +1,11 @@
+.date-card {
+    background-color: lightgray;
+    /* height: auto; */
+    height: 80px;
+  }
+  
+.date-card-table {
+    /* fix hard coding? */
+    height: 80px;
+    /* height: 100%; */
+}
