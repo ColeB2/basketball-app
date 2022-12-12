@@ -20,7 +20,7 @@ interface ScoreCardProps {
 }
 
 const ScoreCard = (props: ScoreCardProps) => (
-    <div className="card" onClick={props.handleClick}>
+    <div className="score-card" onClick={props.handleClick}>
         <table className="card-table">
             <thead className="card-table-head">
                 <tr className="card-table-row">

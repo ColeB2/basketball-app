@@ -1,0 +1,21 @@
+.carousel-container {
+    position: fixed;
+    z-index: 2;
+    background-color: white;
+    width: 100%;
+}
+
+/* Swiper css */
+.swiper-slide {
+    width: auto;
+}
+  
+.swiper-ticker-date {
+    width: 80px;
+    height: 100px;
+    background-color: rgb(215,215,215);
+    /*border-bottom: 2px solid gray;*/
+    /*border-top: 2px solid gray;*/
+    /*border-right: 2px solid gray;*/
+    /*border-left: 2px solid gray;*/
+}
