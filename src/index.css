@@ -66,9 +66,6 @@ Boxscore Table
   display: flexbox;
   margin: auto;
   justify-content: center;
-  /* width: 70%; */
-  /* width: 1280px; */
-  border: 1px solid chartreuse;
 }
 @media screen and (min-width: 1280px) {
   .boxscore-container {width: 1280px;}
@@ -92,8 +89,13 @@ Boxscore Table
   text-align: left;
 }
 
+.boxscore-table tr{
+  height: 10px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
-td,th {
-  white-space: no-wrap;
-  overflow: hidden;
+td, th {
+  white-space: nowrap !important;
+  overflow: hidden !important;
 }

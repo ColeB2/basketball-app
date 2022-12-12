@@ -20,10 +20,13 @@ const BoxScore = (props: BoxScoreProps) => {
         {label: "PTS", accessor: "pts"},
         {label: "FGM", accessor: "fgm"},
         {label: "FGA", accessor: "fga"},
+        {label: "FG%", accessor: "fg_pct", rate: true},
         {label: "3PM", accessor: "fg3m"},
         {label: "3PA", accessor: "fg3a"},
+        {label: "3P%", accessor: "fg3_pct", rate: true},
         {label: "FTM", accessor: "ftm"},
         {label: "FTA", accessor: "fta"},
+        {label: "FT%", accessor: "ft_pct", rate: true},
         {label: "OR",  accessor: "oreb"},
         {label: "REB", accessor: "reb"},
         {label: "AST", accessor: "ast"},
@@ -67,17 +70,18 @@ const BoxScore = (props: BoxScoreProps) => {
             {props.data.map((item: any,idx: number) => {
                 return (
                     <tr key={idx}>
-                        {columns.map(({accessor, player, accessor2})=> {
+                        {columns.map(({accessor, player, accessor2, rate})=> {
                              // Handles information held in item.player instead of item.
                             if (player) { 
                                 const tdata = item.player[accessor] ? item.player[accessor] : "---";
                                 const tdata2 = item.player[accessor2] ? item.player[accessor2] : "---";
-                                return <td key={accessor}>{tdata2}, {tdata}</td>
-                            // Handle Shooting made/attempts
-                            } else if (accessor2) {
-                                const tdata = item[accessor] ? item[accessor] : "0";
-                                const tdata2 = item[accessor2] ? item[accessor2] : "0";
-                                return <td key={accessor}>{tdata}-{tdata2}</td>
+                                // return <td key={accessor}>{tdata2}, {tdata}</td>
+                                return <td key={accessor}>{`${tdata2}, ${tdata}`}</td>
+                            } else if (rate) {
+                                const tdata = item[accessor] ? 
+                                    (item[accessor] * 100).toFixed(1):
+                                    "0.0";
+                                return <td key={accessor}>{tdata}</td>
                             // Handles all other values.
                             } else {
                                 const tdata = item[accessor] ? item[accessor] : "0";

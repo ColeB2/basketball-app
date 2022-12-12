@@ -3,10 +3,9 @@
 }
   
 body, html, #root {
-/* position: absolute; */
-font-family: "Arial", sans-serif;
-margin: 0;
-overflow-x: hidden;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 .boxscore-containers {
