@@ -9,8 +9,7 @@ import {
     boxscoreDataType,
     playerStatsDataType,
 } from './types/basketballdata';
-// import axios from "axios";
-import axios from '../node_modules/axios/index.js';
+import axios from 'axios';
 
 const baseURL = 'https://www.balldontlie.io/api/v1/games';
 const baseGameURL =
