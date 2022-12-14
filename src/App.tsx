@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import BoxScore from './components/BoxScore';
-import Carousel from './components/Carousel';
+import BoxScore from './components/BoxScore/BoxScore';
+import Carousel from './components/Carousel/Carousel';
 import emptyDateObject from './types/basketballdata';
 import {
     basketballDataType,
@@ -23,6 +23,10 @@ function App() {
         {} as basketballDataType
     );
     const [currentGameID, setCurrentGameID] = useState<number>(0);
+    //TODO implement this instead of homeTeam/ awayTeam
+    const [currentGameData, setCurrentGameData] = useState<boxscoreDataType>(
+        {} as boxscoreDataType
+    );
     const [homeTeamData, setHomeTeamData] = useState<boxscoreDataType>(
         {} as boxscoreDataType
     );
@@ -119,12 +123,13 @@ function App() {
                     handleClick={selectGameClick}
                 />
             )}
+            {/* BoxScore --> App --> splits home/away inside component? */}
             <div className="boxscore-containers">
-                {currentGameID !== 0 && homeTeamData && (
-                    <BoxScore data={homeTeamData} />
-                )}
                 {currentGameID !== 0 && awayTeamData && (
                     <BoxScore data={awayTeamData} />
+                )}
+                {currentGameID !== 0 && homeTeamData && (
+                    <BoxScore data={homeTeamData} />
                 )}
             </div>
         </div>

@@ -12,9 +12,9 @@ import './Carousel.css';
 // modules styles
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import ScoreCard from './ScoreCard';
-import DateCard from './DateCard';
-import { basketballData } from '../types/basketballdata';
+import ScoreCard from '../ScoreCard/ScoreCard';
+import DateCard from '../DateCard/DateCard';
+import { basketballData } from '../../types/basketballdata';
 
 // extend apibasketballData?
 interface CarouselProps {

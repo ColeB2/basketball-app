@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { basketballData } from '../types/basketballdata';
+import { basketballData } from '../../types/basketballdata';
 import './DateCard.css';
 
 const months = [
