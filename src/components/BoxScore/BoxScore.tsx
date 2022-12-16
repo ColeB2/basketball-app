@@ -45,7 +45,6 @@ const BoxScore = (props: BoxScoreProps) => {
         props.data.keys && (
             <div className="boxscore-container table-responsive">
                 <h1 className="boxscore-title">
-                    {console.log('HIRE', props.data)}
                     {props.data[0].team.full_name}
                 </h1>
                 <table className="boxscore-table table table-striped table-hover">

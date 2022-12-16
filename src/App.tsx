@@ -6,8 +6,8 @@ import emptyDateObject from './types/basketballdata';
 import {
     basketballDataType,
     basketballData,
-    boxscoreDataType,
     playerStatsDataType,
+    gameDataType,
 } from './types/basketballdata';
 import axios from 'axios';
 
@@ -23,15 +23,8 @@ function App() {
         {} as basketballDataType
     );
     const [currentGameID, setCurrentGameID] = useState<number>(0);
-    //TODO implement this instead of homeTeam/ awayTeam
-    const [currentGameData, setCurrentGameData] = useState<boxscoreDataType>(
-        {} as boxscoreDataType
-    );
-    const [homeTeamData, setHomeTeamData] = useState<boxscoreDataType>(
-        {} as boxscoreDataType
-    );
-    const [awayTeamData, setAwayTeamData] = useState<boxscoreDataType>(
-        {} as boxscoreDataType
+    const [currentGameData, setCurrentGameData] = useState<gameDataType>(
+        {} as gameDataType
     );
 
     const date = new Date();
@@ -45,7 +38,7 @@ function App() {
     }-${today.getDate()}`;
     useEffect(() => {
         // eslint-disable-next-line
-    axios.get(baseURL + "?dates[]=" + dateStr).then((response:any) => {
+        axios.get(baseURL + "?dates[]=" + dateStr).then((response:any) => {
             response.data.data.map((item: basketballData) => {
                 item.dateObj = false;
             });
@@ -57,7 +50,7 @@ function App() {
     useEffect(() => {
         // TODO: Fix all eslint-disable-next-lines that is the response:any fix.
         // eslint-disable-next-line
-    axios.get(baseURL + "?dates[]=" + todayStr).then((response:any) => {
+        axios.get(baseURL + "?dates[]=" + todayStr).then((response:any) => {
             response.data.data.map((item: basketballData) => {
                 item.dateObj = false;
             });
@@ -75,7 +68,7 @@ function App() {
     // current Game Boxscore data --> updates when gameId changes.
     useEffect(() => {
         // eslint-disable-next-line
-    axios.get(baseGameURL + currentGameID.toString()).then((response:any) => {
+        axios.get(baseGameURL + currentGameID.toString()).then((response:any) => {
                 const boxScoreData = response.data;
                 if (boxScoreData.data.length !== 0) {
                     const home_team_id = boxScoreData.data[0].game.home_team_id;
@@ -89,22 +82,17 @@ function App() {
                         (player: playerStatsDataType) =>
                             player.team.id === away_team_id
                     );
-                    console.log(
-                        home_team_id,
-                        home_team,
-                        away_team_id,
-                        away_team
-                    );
-                    setHomeTeamData(home_team);
-                    setAwayTeamData(away_team);
+                    setCurrentGameData({
+                        home_team: home_team,
+                        away_team: away_team,
+                    });
                 }
             });
     }, [currentGameID]);
 
     function selectGameClick(id: number) {
         setCurrentGameID(id);
-    };
-
+    }
 
     const todayDateObj = Object.assign(emptyDateObject, { date: today });
     return (
@@ -120,11 +108,11 @@ function App() {
             )}
             {/* BoxScore --> App --> splits home/away inside component? */}
             <div className="boxscore-containers">
-                {currentGameID !== 0 && awayTeamData && (
-                    <BoxScore data={awayTeamData} />
+                {currentGameID !== 0 && currentGameData.away_team && (
+                    <BoxScore data={currentGameData.away_team} />
                 )}
-                {currentGameID !== 0 && homeTeamData && (
-                    <BoxScore data={homeTeamData} />
+                {currentGameID !== 0 && currentGameData.home_team && (
+                    <BoxScore data={currentGameData.home_team} />
                 )}
             </div>
         </div>

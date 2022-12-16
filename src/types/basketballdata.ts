@@ -99,10 +99,16 @@ interface boxscoreDataType {
     data: playerStatsDataType[];
 }
 
+interface gameDataType {
+    home_team: boxscoreDataType;
+    away_team: boxscoreDataType;
+}
+
 export type {
     basketballDataType,
     basketballData,
     boxscoreDataType,
+    gameDataType,
     playerStatsDataType,
     teamObject,
 };
