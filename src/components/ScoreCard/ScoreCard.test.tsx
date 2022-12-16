@@ -3,42 +3,6 @@ import { render, screen } from '@testing-library/react';
 
 import ScoreCard from './ScoreCard';
 
-// Mock Testing Data
-const home = {
-    abbreviation: 'TOR',
-    city: 'Toronto',
-    conference: 'Eastern',
-    division: 'Atlantic',
-    full_name: 'Toronto Raptors',
-    id: 1,
-    name: 'Raptors',
-};
-
-const away = {
-    abbreviation: 'BOS',
-    city: 'Boston',
-    conference: 'Eastern',
-    division: 'Atlantic',
-    full_name: 'Boston Celtics',
-    id: 2,
-    name: 'Celtics',
-};
-
-const item = {
-    dateObj: false,
-    date: new Date(),
-    home_team: home,
-    home_team_score: 100,
-    id: 1,
-    period: 0,
-    postseason: false,
-    season: 2022,
-    status: 'Final',
-    time: 'Final',
-    visitor_team: away,
-    visitor_team_score: 99,
-};
-
 describe('ScoreCard', () => {
     it('Renders ScoreCard component', () => {
         // Arrange
@@ -115,3 +79,41 @@ describe('ScoreCard', () => {
         }
     });
 });
+
+////////////////////////
+// Mock Testing Data //
+///////////////////////
+const home = {
+    abbreviation: 'TOR',
+    city: 'Toronto',
+    conference: 'Eastern',
+    division: 'Atlantic',
+    full_name: 'Toronto Raptors',
+    id: 1,
+    name: 'Raptors',
+};
+
+const away = {
+    abbreviation: 'BOS',
+    city: 'Boston',
+    conference: 'Eastern',
+    division: 'Atlantic',
+    full_name: 'Boston Celtics',
+    id: 2,
+    name: 'Celtics',
+};
+
+const item = {
+    dateObj: false,
+    date: new Date(),
+    home_team: home,
+    home_team_score: 100,
+    id: 1,
+    period: 0,
+    postseason: false,
+    season: 2022,
+    status: 'Final',
+    time: 'Final',
+    visitor_team: away,
+    visitor_team_score: 99,
+};
