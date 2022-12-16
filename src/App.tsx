@@ -103,13 +103,8 @@ function App() {
 
     function selectGameClick(id: number) {
         setCurrentGameID(id);
-        console.log('typeof id', typeof id);
-        console.log('Post Click gameId', currentGameID, id);
-    }
+    };
 
-    // console.log('ID CHANGED', currentGameID)
-    // console.log(test.data)
-    console.log(homeTeamData, typeof homeTeamData);
 
     const todayDateObj = Object.assign(emptyDateObject, { date: today });
     return (
