@@ -43,7 +43,7 @@ describe('Carousel', () => {
         // Expect
         const tableRole = screen.getByRole('table');
         // tableRole textContent returns:
-        // 'FinalBoston CelticsBOS99Toronto RaptorsTOR100'
+        // row 1: 'WED' row2: 'DEC 7'
         expect(tableRole).toHaveTextContent('WED');
         expect(tableRole).toHaveTextContent('DEC');
         expect(tableRole).toHaveTextContent('7');
