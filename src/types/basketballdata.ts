@@ -109,6 +109,7 @@ export type {
     basketballData,
     boxscoreDataType,
     gameDataType,
+    gameStatsDataType,
     playerStatsDataType,
     teamObject,
 };
