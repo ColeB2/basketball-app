@@ -10,35 +10,36 @@ interface BoxScoreProps {
     data: any;
 }
 
+const columns = [
+    {
+        label: 'First',
+        accessor: 'first_name',
+        accessor2: 'last_name',
+        player: true,
+    },
+    // {label: "Last", accessor: "last_name", player: true},
+    { label: 'MIN', accessor: 'min' },
+    { label: 'PTS', accessor: 'pts' },
+    { label: 'FGM', accessor: 'fgm' },
+    { label: 'FGA', accessor: 'fga' },
+    { label: 'FG%', accessor: 'fg_pct', rate: true },
+    { label: '3PM', accessor: 'fg3m' },
+    { label: '3PA', accessor: 'fg3a' },
+    { label: '3P%', accessor: 'fg3_pct', rate: true },
+    { label: 'FTM', accessor: 'ftm' },
+    { label: 'FTA', accessor: 'fta' },
+    { label: 'FT%', accessor: 'ft_pct', rate: true },
+    { label: 'OR', accessor: 'oreb' },
+    { label: 'REB', accessor: 'reb' },
+    { label: 'AST', accessor: 'ast' },
+    { label: 'BLK', accessor: 'blk' },
+    { label: 'STL', accessor: 'stl' },
+    { label: 'TO', accessor: 'turnover' },
+    { label: 'PF', accessor: 'pf' },
+];
+
 const BoxScore = (props: BoxScoreProps) => {
     // const [tableData, setTableData] = useState(tableData)
-    const columns = [
-        {
-            label: 'First',
-            accessor: 'first_name',
-            accessor2: 'last_name',
-            player: true,
-        },
-        // {label: "Last", accessor: "last_name", player: true},
-        { label: 'MIN', accessor: 'min' },
-        { label: 'PTS', accessor: 'pts' },
-        { label: 'FGM', accessor: 'fgm' },
-        { label: 'FGA', accessor: 'fga' },
-        { label: 'FG%', accessor: 'fg_pct', rate: true },
-        { label: '3PM', accessor: 'fg3m' },
-        { label: '3PA', accessor: 'fg3a' },
-        { label: '3P%', accessor: 'fg3_pct', rate: true },
-        { label: 'FTM', accessor: 'ftm' },
-        { label: 'FTA', accessor: 'fta' },
-        { label: 'FT%', accessor: 'ft_pct', rate: true },
-        { label: 'OR', accessor: 'oreb' },
-        { label: 'REB', accessor: 'reb' },
-        { label: 'AST', accessor: 'ast' },
-        { label: 'BLK', accessor: 'blk' },
-        { label: 'STL', accessor: 'stl' },
-        { label: 'TO', accessor: 'turnover' },
-        { label: 'PF', accessor: 'pf' },
-    ];
 
     return (
         props &&
@@ -50,7 +51,9 @@ const BoxScore = (props: BoxScoreProps) => {
                 <table className="boxscore-table table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>{props.data[0].team.city}</th>
+                            <th className="player">
+                                {props.data[0].team.city}
+                            </th>
                             {columns.map(({ label, accessor, player }) => {
                                 if (player) {
                                     return;
@@ -68,7 +71,7 @@ const BoxScore = (props: BoxScoreProps) => {
                         {/* eslint-disable-next-line */}
                         {props.data.map((item: any, idx: number) => {
                             return (
-                                <tr key={idx}>
+                                <tr key={item.id}>
                                     {columns.map(
                                         ({
                                             accessor,
@@ -92,6 +95,7 @@ const BoxScore = (props: BoxScoreProps) => {
                                                 return (
                                                     <td
                                                         key={accessor}
+                                                        className={'player'}
                                                     >{`${tdata2}, ${tdata}`}</td>
                                                 );
                                             } else if (rate) {
@@ -101,7 +105,10 @@ const BoxScore = (props: BoxScoreProps) => {
                                                       ).toFixed(1)
                                                     : '0.0';
                                                 return (
-                                                    <td key={accessor}>
+                                                    <td
+                                                        key={accessor}
+                                                        className={accessor}
+                                                    >
                                                         {tdata}
                                                     </td>
                                                 );
@@ -111,7 +118,10 @@ const BoxScore = (props: BoxScoreProps) => {
                                                     ? item[accessor]
                                                     : '0';
                                                 return (
-                                                    <td key={accessor}>
+                                                    <td
+                                                        key={accessor}
+                                                        className={accessor}
+                                                    >
                                                         {tdata}
                                                     </td>
                                                 );

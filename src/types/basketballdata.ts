@@ -40,13 +40,13 @@ interface gameStatsDataType {
 
 interface playerInfoDataType {
     first_name: string;
-    height_feet: number;
-    height_inches: number;
+    height_feet: number | null;
+    height_inches: number | null;
     id: number;
     last_name: string;
     position: string;
     team_id: number;
-    weight_pounds: number;
+    weight_pounds: number | null;
 }
 
 interface playerStatsDataType {
@@ -63,7 +63,7 @@ interface playerStatsDataType {
     ft_pct: number;
     fta: number;
     ftm: number;
-    min: number;
+    min: string;
     oreb: number;
     pf: number;
     pts: number;
@@ -74,21 +74,6 @@ interface playerStatsDataType {
     game: gameStatsDataType;
     team: teamObject;
 }
-
-const emptyDateObject = {
-    dateObj: true,
-    date: null,
-    home_team: {},
-    home_team_score: 0,
-    id: 0,
-    period: 0,
-    postseason: 0,
-    season: 0,
-    status: 0,
-    time: 0,
-    visitor_team: 0,
-    visitor_team_score: 0,
-};
 
 interface basketballDataType {
     data: basketballData[];
@@ -111,6 +96,23 @@ export type {
     gameDataType,
     gameStatsDataType,
     playerStatsDataType,
+    playerInfoDataType,
     teamObject,
 };
+
+const emptyDateObject = {
+    dateObj: true,
+    date: null,
+    home_team: {},
+    home_team_score: 0,
+    id: 0,
+    period: 0,
+    postseason: 0,
+    season: 0,
+    status: 0,
+    time: 0,
+    visitor_team: 0,
+    visitor_team_score: 0,
+};
+
 export default emptyDateObject;

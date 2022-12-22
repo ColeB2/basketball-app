@@ -2,6 +2,8 @@ import {
     teamObject,
     gameStatsDataType,
     basketballData,
+    playerStatsDataType,
+    playerInfoDataType,
 } from '../../types/basketballdata';
 import emptyDateObject from '../../types/basketballdata';
 
@@ -57,7 +59,7 @@ const basketballTestData: basketballData = {
     visitor_team_score: 126,
 };
 
-const player1 = {
+const player1: playerInfoDataType = {
     id: 206,
     first_name: 'Juancho',
     height_feet: 6,
@@ -67,7 +69,7 @@ const player1 = {
     team_id: 28,
     weight_pounds: 230,
 };
-const player2 = {
+const player2: playerInfoDataType = {
     id: 416,
     first_name: 'Pascal',
     height_feet: 6,
@@ -77,7 +79,7 @@ const player2 = {
     team_id: 28,
     weight_pounds: 230,
 };
-const player3 = {
+const player3: playerInfoDataType = {
     id: 38017710,
     first_name: 'Christian',
     height_feet: null,
@@ -87,7 +89,7 @@ const player3 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player4 = {
+const player4: playerInfoDataType = {
     id: 17896055,
     first_name: 'Scottie',
     height_feet: null,
@@ -97,7 +99,7 @@ const player4 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player5 = {
+const player5: playerInfoDataType = {
     id: 458,
     first_name: 'Fred',
     height_feet: 6,
@@ -107,7 +109,7 @@ const player5 = {
     team_id: 28,
     weight_pounds: 195,
 };
-const player6 = {
+const player6: playerInfoDataType = {
     id: 3547249,
     first_name: 'Precious',
     height_feet: null,
@@ -117,7 +119,7 @@ const player6 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player7 = {
+const player7: playerInfoDataType = {
     id: 17896094,
     first_name: 'Dalano',
     height_feet: null,
@@ -127,7 +129,7 @@ const player7 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player8 = {
+const player8: playerInfoDataType = {
     id: 46,
     first_name: 'Khem',
     height_feet: 6,
@@ -137,7 +139,7 @@ const player8 = {
     team_id: 28,
     weight_pounds: 233,
 };
-const player9 = {
+const player9: playerInfoDataType = {
     id: 58,
     first_name: 'Chris',
     height_feet: 6,
@@ -147,7 +149,7 @@ const player9 = {
     team_id: 28,
     weight_pounds: 200,
 };
-const player10 = {
+const player10: playerInfoDataType = {
     id: 3547275,
     first_name: 'Malachi',
     height_feet: null,
@@ -157,7 +159,7 @@ const player10 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player11 = {
+const player11: playerInfoDataType = {
     id: 3089,
     first_name: 'Gary',
     height_feet: 6,
@@ -167,7 +169,7 @@ const player11 = {
     team_id: 28,
     weight_pounds: 205,
 };
-const player12 = {
+const player12: playerInfoDataType = {
     id: 489,
     first_name: 'Thaddeus',
     height_feet: 6,
@@ -177,7 +179,7 @@ const player12 = {
     team_id: 28,
     weight_pounds: 221,
 };
-const player13 = {
+const player13: playerInfoDataType = {
     id: 18,
     first_name: 'OG',
     height_feet: 6,
@@ -187,7 +189,7 @@ const player13 = {
     team_id: 28,
     weight_pounds: 232,
 };
-const player14 = {
+const player14: playerInfoDataType = {
     id: 17896039,
     first_name: 'Justin',
     height_feet: null,
@@ -197,7 +199,7 @@ const player14 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player15 = {
+const player15: playerInfoDataType = {
     id: 17553988,
     first_name: 'Jeff',
     height_feet: null,
@@ -207,7 +209,7 @@ const player15 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player16 = {
+const player16: playerInfoDataType = {
     id: 38017717,
     first_name: 'Ron',
     height_feet: null,
@@ -217,7 +219,7 @@ const player16 = {
     team_id: 28,
     weight_pounds: null,
 };
-const player17 = {
+const player17: playerInfoDataType = {
     id: 376,
     first_name: 'Otto',
     height_feet: 6,
@@ -228,8 +230,8 @@ const player17 = {
     weight_pounds: 198,
 };
 
-const boxscoreData = {
-    0: {
+const boxscoreData: playerStatsDataType[] = [
+    {
         ast: 0,
         blk: 1,
         dreb: 2,
@@ -254,7 +256,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 1,
     },
-    1: {
+    {
         ast: 6,
         blk: 0,
         dreb: 3,
@@ -279,7 +281,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 1,
     },
-    2: {
+    {
         ast: 0,
         blk: 1,
         dreb: 2,
@@ -304,7 +306,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 2,
     },
-    3: {
+    {
         ast: 3,
         blk: 0,
         dreb: 3,
@@ -329,7 +331,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 3,
     },
-    4: {
+    {
         ast: 8,
         blk: 0,
         dreb: 4,
@@ -354,7 +356,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 2,
     },
-    5: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -379,7 +381,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    6: {
+    {
         ast: 2,
         blk: 0,
         dreb: 0,
@@ -404,7 +406,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    7: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -429,7 +431,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    8: {
+    {
         ast: 0,
         blk: 0,
         dreb: 7,
@@ -454,7 +456,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 1,
     },
-    9: {
+    {
         ast: 2,
         blk: 0,
         dreb: 2,
@@ -479,7 +481,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    10: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -504,7 +506,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    11: {
+    {
         ast: 0,
         blk: 0,
         dreb: 2,
@@ -529,7 +531,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 2,
     },
-    12: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -554,7 +556,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    13: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -579,7 +581,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    14: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -604,7 +606,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    15: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -629,7 +631,7 @@ const boxscoreData = {
         team: raptorsTeam,
         turnover: 0,
     },
-    16: {
+    {
         ast: 0,
         blk: 0,
         dreb: 0,
@@ -651,9 +653,10 @@ const boxscoreData = {
         pts: 0,
         reb: 0,
         stl: 0,
+        team: raptorsTeam,
         turnover: 0,
     },
-};
+];
 
 export default {
     raptorsTeam,
