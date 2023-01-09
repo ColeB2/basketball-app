@@ -27,7 +27,7 @@ const warriorsTeam: teamObject = {
     name: 'Warriors',
 };
 
-const testDate = new Date('2022-12-18T00:00:00.000Z');
+const testDate = new Date('2022-12-17T07:00:00.000Z');
 const testDateObj = Object.assign(emptyDateObject, { date: testDate });
 
 const gameStatsTestData: gameStatsDataType = {
