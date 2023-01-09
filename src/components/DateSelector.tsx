@@ -1,7 +1,5 @@
-import React from "react";
+import React from 'react';
 
-
-const DateSelector = (props: Date) => (
-    <div></div>
-)
+// eslint-disable-next-line
+const DateSelector = (props: Date) => <div></div>;
 export default DateSelector;

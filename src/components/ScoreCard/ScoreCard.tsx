@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import {teamObject} from '../types/basketballdata'
-import NBAIconsMap from '../helpers/nbaiconsmap'
+import { teamObject } from '../../types/basketballdata';
+import NBAIconsMap from '../../helpers/nbaiconsmap';
 
-import './ScoreCard.css'
+import './ScoreCard.css';
 
 interface ScoreCardProps {
     dateObj?: boolean;
@@ -26,7 +26,9 @@ const ScoreCard = (props: ScoreCardProps) => (
         <table className="card-table">
             <thead className="card-table-head">
                 <tr className="card-table-row">
-                    <th colSpan={3} className="status">{props.time ? props.time : props.status}</th>
+                    <th colSpan={3} className="status">
+                        {props.time ? props.time : props.status}
+                    </th>
                 </tr>
             </thead>
             <tbody className="">
@@ -34,18 +36,22 @@ const ScoreCard = (props: ScoreCardProps) => (
                     <td className="team-icon">
                         {NBAIconsMap[props.visitor_team.abbreviation]}
                     </td>
-                    <td className="team-abbr">{props.visitor_team.abbreviation}</td>
+                    <td className="team-abbr">
+                        {props.visitor_team.abbreviation}
+                    </td>
                     <td className="team-score">{props.visitor_team_score}</td>
                 </tr>
                 <tr className="card-table-row">
                     <td className="team-icon">
                         {NBAIconsMap[props.home_team.abbreviation]}
                     </td>
-                    <td className="team-abbr">{props.home_team.abbreviation}</td>
+                    <td className="team-abbr">
+                        {props.home_team.abbreviation}
+                    </td>
                     <td className="team-score">{props.home_team_score}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-)
+);
 export default ScoreCard;
