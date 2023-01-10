@@ -9,6 +9,8 @@ import {
     playerStatsDataType,
     gameDataType,
 } from './types/basketballdata';
+import { minutesSort } from './helpers/helperFunctions';
+
 import axios from 'axios';
 
 const baseURL = 'https://www.balldontlie.io/api/v1/games';
@@ -82,6 +84,8 @@ function App() {
                         (player: playerStatsDataType) =>
                             player.team.id === away_team_id
                     );
+                    home_team.sort(minutesSort);
+                    away_team.sort(minutesSort);
                     setCurrentGameData({
                         home_team: home_team,
                         away_team: away_team,

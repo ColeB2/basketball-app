@@ -92,12 +92,15 @@ const BoxScore = (props: BoxScoreProps) => {
                                                     ]
                                                         ? item.player[accessor2]
                                                         : '---';
-                                                    // return <td key={accessor}>{tdata2}, {tdata}</td>
                                                     return (
+                                                        // Regex to shorten name
                                                         <td
                                                             key={accessor}
                                                             className={'player'}
-                                                        >{`${tdata2}, ${tdata}`}</td>
+                                                        >{`${tdata.replace(
+                                                            /\b(\w)\w+/g,
+                                                            '$1.'
+                                                        )} ${tdata2}`}</td>
                                                     );
                                                 } else if (rate) {
                                                     const tdata = item[accessor]
