@@ -11,7 +11,8 @@ Boxscore Table
 
 
 .boxscore-container {
-    display: flexbox;
+    /* display: flexbox; */
+    /* display: flex; */
     margin: auto;
     justify-content: center;
   }
@@ -22,12 +23,24 @@ Boxscore Table
 
 .boxscore-title {
     text-align: center;
+    white-space: pre;
+    display: block;
+
+}
+
+.boxscore-table-div {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .boxscore-table {
     width: 100%;
     text-align: end;
+    align-items: center;
 }
+
+
 
 /* First Column Stick. */
 .boxscore-table th:first-child,
@@ -70,7 +83,6 @@ Boxscore Table
     background-color: var(--table-row-color-1);
 }
 
-.table-hover tbody tr:hover td {
+.boxscore-table-hover tbody tr:hover td {
     background-color: var(--table-hover-color) !important;
-
 }

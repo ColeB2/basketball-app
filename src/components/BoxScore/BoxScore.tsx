@@ -44,95 +44,98 @@ const BoxScore = (props: BoxScoreProps) => {
     return (
         props &&
         props.data.keys && (
-            <div className="boxscore-container table-responsive">
+            <div className="boxscore-container">
                 <h1 className="boxscore-title">
                     {props.data[0].team.full_name}
                 </h1>
-                <table className="boxscore-table table-hover">
-                    <thead>
-                        <tr>
-                            <th className="player">
-                                {props.data[0].team.city}
-                            </th>
-                            {columns.map(({ label, accessor, player }) => {
-                                if (player) {
-                                    return;
-                                }
+                <div className="boxscore-table-div">
+                    <table className="boxscore-table boxscore-table-hover">
+                        <thead>
+                            <tr>
+                                <th className="player">
+                                    {props.data[0].team.city}
+                                </th>
+                                {columns.map(({ label, accessor, player }) => {
+                                    if (player) {
+                                        return;
+                                    }
+                                    return (
+                                        <th key={accessor} className={accessor}>
+                                            {label}
+                                        </th>
+                                    );
+                                })}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* Fix */}
+                            {/* eslint-disable-next-line */}
+                        {props.data.map((item: any, idx: number) => {
                                 return (
-                                    <th key={accessor} className={accessor}>
-                                        {label}
-                                    </th>
+                                    <tr key={item.id}>
+                                        {columns.map(
+                                            ({
+                                                accessor,
+                                                player,
+                                                accessor2,
+                                                rate,
+                                            }) => {
+                                                // Handles information held in item.player instead of item.
+                                                if (player) {
+                                                    const tdata = item.player[
+                                                        accessor
+                                                    ]
+                                                        ? item.player[accessor]
+                                                        : '---';
+                                                    const tdata2 = item.player[
+                                                        accessor2
+                                                    ]
+                                                        ? item.player[accessor2]
+                                                        : '---';
+                                                    // return <td key={accessor}>{tdata2}, {tdata}</td>
+                                                    return (
+                                                        <td
+                                                            key={accessor}
+                                                            className={'player'}
+                                                        >{`${tdata2}, ${tdata}`}</td>
+                                                    );
+                                                } else if (rate) {
+                                                    const tdata = item[accessor]
+                                                        ? (
+                                                              item[accessor] *
+                                                              100
+                                                          ).toFixed(1)
+                                                        : '0.0';
+                                                    return (
+                                                        <td
+                                                            key={accessor}
+                                                            className={accessor}
+                                                        >
+                                                            {tdata}
+                                                        </td>
+                                                    );
+                                                    // Handles all other values.
+                                                } else {
+                                                    const tdata = item[accessor]
+                                                        ? item[accessor]
+                                                        : '0';
+                                                    return (
+                                                        <td
+                                                            key={accessor}
+                                                            className={accessor}
+                                                        >
+                                                            {tdata}
+                                                        </td>
+                                                    );
+                                                }
+                                            }
+                                        )}
+                                    </tr>
                                 );
                             })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* Fix */}
-                        {/* eslint-disable-next-line */}
-                        {props.data.map((item: any, idx: number) => {
-                            return (
-                                <tr key={item.id}>
-                                    {columns.map(
-                                        ({
-                                            accessor,
-                                            player,
-                                            accessor2,
-                                            rate,
-                                        }) => {
-                                            // Handles information held in item.player instead of item.
-                                            if (player) {
-                                                const tdata = item.player[
-                                                    accessor
-                                                ]
-                                                    ? item.player[accessor]
-                                                    : '---';
-                                                const tdata2 = item.player[
-                                                    accessor2
-                                                ]
-                                                    ? item.player[accessor2]
-                                                    : '---';
-                                                // return <td key={accessor}>{tdata2}, {tdata}</td>
-                                                return (
-                                                    <td
-                                                        key={accessor}
-                                                        className={'player'}
-                                                    >{`${tdata2}, ${tdata}`}</td>
-                                                );
-                                            } else if (rate) {
-                                                const tdata = item[accessor]
-                                                    ? (
-                                                          item[accessor] * 100
-                                                      ).toFixed(1)
-                                                    : '0.0';
-                                                return (
-                                                    <td
-                                                        key={accessor}
-                                                        className={accessor}
-                                                    >
-                                                        {tdata}
-                                                    </td>
-                                                );
-                                                // Handles all other values.
-                                            } else {
-                                                const tdata = item[accessor]
-                                                    ? item[accessor]
-                                                    : '0';
-                                                return (
-                                                    <td
-                                                        key={accessor}
-                                                        className={accessor}
-                                                    >
-                                                        {tdata}
-                                                    </td>
-                                                );
-                                            }
-                                        }
-                                    )}
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     );

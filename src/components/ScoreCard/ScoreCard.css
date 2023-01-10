@@ -28,6 +28,11 @@
     /* border: 1px solid orange; */
     width: 100%;
   }
+
+  .card-table td, .card-table th, .card-table tr {
+    /* border: 1px solid aqua; */
+    padding: 0;
+  }
   
   .card-table-head {
     padding: 0px;
