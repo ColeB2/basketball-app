@@ -35,6 +35,7 @@ Boxscore Table
     width: 100%;
     text-align: end;
     align-items: center;
+    border-collapse: collapse;
 }
 
 
