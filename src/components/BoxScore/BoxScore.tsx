@@ -48,7 +48,7 @@ const BoxScore = (props: BoxScoreProps) => {
                 <h1 className="boxscore-title">
                     {props.data[0].team.full_name}
                 </h1>
-                <table className="boxscore-table table table-striped table-hover">
+                <table className="boxscore-table table-hover">
                     <thead>
                         <tr>
                             <th className="player">
