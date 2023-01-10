@@ -5,42 +5,47 @@
     margin: 0;
     padding: 0;
     width: 165px;
-  }
+}
   
-  .team-icon {
+.team-icon {
     padding: 0px;
     margin: 0px;
     width: 10px;
-  }
+}
   
-  .team-abbr {
+.team-abbr {
     padding: 0px;
     margin: 0px;
     width: 40px;
-  }
-  .team-score {
+}
+.team-score {
     /* border: 1px solid black; */
     /* width: 50px; */
     text-align: end;
-  }
+}
   
-  .card-table {
+.card-table {
     /* border: 1px solid orange; */
     width: 100%;
-  }
+}
+
+.card-table td, .card-table th, .card-table tr {
+    /* border: 1px solid aqua; */
+    padding: 0;
+}
   
-  .card-table-head {
+.card-table-head {
     padding: 0px;
     margin: 0px;
-  }
+}
   
-  .card-table-body {
+.card-table-body {
     padding: 0px;
     margin: 0px;
-  }
+}
   
-  .card-table-row {
+.card-table-row {
     padding: 0px;
     margin: 0px;
-  }
+}
   

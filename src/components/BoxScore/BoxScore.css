@@ -3,40 +3,84 @@
 Boxscore Table
 --------------
 */
+:root {
+    --table-row-color-1: rgb(255,255,255);
+    --table-row-color-2: rgb(238,238,238);
+    --table-hover-color: rgb(200,200,200);
+}
+
+
 .boxscore-container {
-    display: flexbox;
+    /* display: flexbox; */
+    /* display: flex; */
     margin: auto;
     justify-content: center;
   }
-  @media screen and (min-width: 1280px) {
+
+@media screen and (min-width: 1280px) {
     .boxscore-container {width: 1280px;}
-  }
-  
-  .boxscore-title {
+}
+
+.boxscore-title {
     text-align: center;
-  }
-  
-  .boxscore-table {
+}
+
+.boxscore-table-div {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.boxscore-table {
     width: 100%;
     text-align: end;
-  }
-  
-  .boxscore-table th:first-child,
-  .boxscore-table td:first-child {
+    align-items: center;
+    border-collapse: collapse;
+}
+
+
+
+/* First Column Stick. */
+.boxscore-table th:first-child,
+.boxscore-table td:first-child {
     position: sticky;
     left: 0;
     z-index: 1;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgb(255, 255, 255); */
     text-align: left;
-  }
-  
-  .boxscore-table tr{
+}
+
+.boxscore-table tr {
     height: 10px;
     margin: 0 !important;
     padding: 0 !important;
-  }
-  
-  .boxscore-table td, .boxscore-table th {
+}
+
+/*  */
+.boxscore-table td, .boxscore-table th {
     white-space: nowrap !important;
     overflow: hidden !important;
-  }
+    padding: .5rem;
+}
+
+/* zebra striping */
+.boxscore-table th { 
+    background: var(--table-row-color-2); 
+}
+.boxscore-table tr:nth-of-type(even) { 
+    background: var(--table-row-color-2); 
+}
+
+/* First Column sticky --> Color so text doesn't overlap */
+.boxscore-table tr:nth-of-type(even) > td:first-child, 
+.boxscore-table tr:nth-of-type(even) > th:first-child {
+    background-color: var(--table-row-color-2);
+}
+
+.boxscore-table tr:nth-of-type(odd) > td:first-child {
+    background-color: var(--table-row-color-1);
+}
+
+.boxscore-table-hover tbody tr:hover td {
+    background-color: var(--table-hover-color) !important;
+}

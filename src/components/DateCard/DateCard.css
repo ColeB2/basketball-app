@@ -1,11 +1,18 @@
+:root {
+    --date-card-color: rgb(211,211,211);
+    --date-card-height: 86px;
+}
+
 .date-card {
-    background-color: lightgray;
+    background-color: var(--date-card-color);
     /* height: auto; */
-    height: 80px;
+    /* height: 80px; */
+    height: var(--date-card-height);
   }
   
 .date-card-table {
     /* fix hard coding? */
-    height: 80px;
+    /* height: 80px; */
+    height: var(--date-card-height);
     /* height: 100%; */
 }
