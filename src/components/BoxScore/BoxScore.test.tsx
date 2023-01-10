@@ -33,7 +33,9 @@ describe('BoxScore', () => {
         // const role = screen.getAllByRole('colgroup');
         testData.boxscoreData.forEach((playerStats) => {
             const player = playerStats.player;
-            const name = `${player.last_name}, ${player.first_name}`;
+            // const name = `${player.last_name}, ${player.first_name}`;
+            const first = player.first_name.replace(/\b(\w)\w+/g, '$1.');
+            const name = `${first} ${player.last_name}`;
             const row = screen.getByText(name).closest('tr');
 
             if (row) {

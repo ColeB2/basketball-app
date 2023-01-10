@@ -11,3 +11,8 @@ body, html, #root {
 .boxscore-containers {
     padding-top: 100px;
 }
+
+:root {
+    --background-color: rgb(205, 45, 45);
+    --text-color: #000;
+}
