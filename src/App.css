@@ -1,3 +1,30 @@
+[data-theme="light"] {
+    --background-color: rgb(255,255,255);
+    --text-color: black;
+
+    --table-row-color-primary: rgb(255, 255, 255);
+    --table-row-color-secondary: rgb(238,238,238);
+    --table-hover-color-primary: rgb(200,200,200);
+
+    --ticker-date-color: rgb(215,215,215);
+}
+
+[data-theme="dark"] {
+    --background-color: rgb(0, 0, 0);
+    --text-color: rgb(255, 255, 255);
+
+    --table-row-color-primary: rgb(0,0,0);
+    --table-row-color-secondary: rgb(17,17,17);
+    --table-hover-color-primary: rgb(55,55,55);
+
+    --ticker-date-color: rgb(40,40,40);
+}
+
+/* 
+--------------
+Base CSS
+--------------
+*/
 * {
     box-sizing: border-box;
 }
@@ -8,11 +35,64 @@ body, html, #root {
     overflow-x: hidden;
 }
 
+.App {
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
 .boxscore-containers {
     padding-top: 100px;
 }
 
-:root {
-    --background-color: rgb(205, 45, 45);
-    --text-color: #000;
+.container {
+    color: var(--text-color);
+    background-color: var(--background-color);
+    height: 100vh;
+}
+
+.toggle {
+    /* display: inline-flex; */
+    display: flex;
+    color: black;
+    /* justify-content: center; */
+    /* padding: 10px; */
+    justify-content: center;
+    /* border: 1px solid black;
+    border-radius: 50%; */
+    
+
+    width: 32px;
+    height: 32px;
+
+    cursor: pointer;
+}
+
+.toggle:hover {
+    background-color: bisque;
+    border-radius: 50%;
+    border-color: aqua;
+}
+
+.button-image {
+    align-self: center;
+    width: 24px;
+    height: 24px;
+}
+
+.header-container {
+    background-color: var(--background-color);
+    position: fixed;
+    z-index: 2;
+}
+
+.button-container {
+    display: inline;
+    float: left;
+
+    min-width: 80px;
+    min-height: 86px;
+    width: 80px;
+    height: 86px;
+
+    background-color: var(--ticker-date-color);
 }

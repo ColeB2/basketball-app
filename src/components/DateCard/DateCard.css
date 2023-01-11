@@ -1,10 +1,9 @@
 :root {
-    --date-card-color: rgb(211,211,211);
     --date-card-height: 86px;
 }
 
 .date-card {
-    background-color: var(--date-card-color);
+    background-color: var(--ticker-date-color);
     /* height: auto; */
     /* height: 80px; */
     height: var(--date-card-height);

@@ -3,11 +3,11 @@
 Boxscore Table
 --------------
 */
-:root {
-    --table-row-color-1: rgb(255,255,255);
-    --table-row-color-2: rgb(238,238,238);
-    --table-hover-color: rgb(200,200,200);
-}
+/* :root {
+    --table-row-color-1: var(--table-row-color-primary);
+    --table-row-color-2: var(--table-row-color-secondary);
+    --table-hover-color: var(--table-hover-color-primary);
+} */
 
 
 .boxscore-container {
@@ -65,22 +65,22 @@ Boxscore Table
 
 /* zebra striping */
 .boxscore-table th { 
-    background: var(--table-row-color-2); 
+    background-color: var(--table-row-color-secondary); 
 }
 .boxscore-table tr:nth-of-type(even) { 
-    background: var(--table-row-color-2); 
+    background-color: var(--table-row-color-secondary);
 }
 
 /* First Column sticky --> Color so text doesn't overlap */
 .boxscore-table tr:nth-of-type(even) > td:first-child, 
 .boxscore-table tr:nth-of-type(even) > th:first-child {
-    background-color: var(--table-row-color-2);
+    background-color: var(--table-row-color-secondary);
 }
 
 .boxscore-table tr:nth-of-type(odd) > td:first-child {
-    background-color: var(--table-row-color-1);
+    background-color: var(--table-row-color-primary);
 }
 
 .boxscore-table-hover tbody tr:hover td {
-    background-color: var(--table-hover-color) !important;
+    background-color: var(--table-hover-color-primary) !important;
 }
