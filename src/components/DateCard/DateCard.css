@@ -1,5 +1,5 @@
 :root {
-    --date-card-height: 86px;
+    --date-card-height: var(--header-height);
 }
 
 .date-card {

@@ -27,6 +27,7 @@ Base CSS
 */
 :root {
     --background-color: rgb(255, 255, 255);
+    --header-height: 90px;
 }
 
 * {
@@ -97,7 +98,7 @@ body, html, #root {
     min-width: 80px;
     min-height: 86px;
     width: 80px;
-    height: 86px;
+    height: var(--header-height);
 
     background-color: var(--ticker-date-color);
 }

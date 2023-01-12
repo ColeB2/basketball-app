@@ -4,7 +4,6 @@
     width: 100%;
     /* width: 90vw; */
     /* width: auto; */
-
     display: inline;
 }
 
@@ -15,7 +14,7 @@
   
 .swiper-ticker-date {
     width: 80px;
-    height: 100px;
+    height: var(--header-height);
     /* background-color: rgb(215,215,215); */
     background-color: var(--ticker-date-color);
     /*border-bottom: 2px solid gray;*/
