@@ -25,6 +25,10 @@
 Base CSS
 --------------
 */
+:root {
+    --background-color: black;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -33,6 +37,7 @@ body, html, #root {
     font-family: "Arial", sans-serif;
     margin: 0;
     overflow-x: hidden;
+    background-color: var(--background-color);
 }
 
 .App {
@@ -47,7 +52,7 @@ body, html, #root {
 .container {
     color: var(--text-color);
     background-color: var(--background-color);
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .toggle {

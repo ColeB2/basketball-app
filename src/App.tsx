@@ -100,8 +100,10 @@ function App() {
     }
 
     function toggleTheme() {
+        const color = theme == 'dark' ? 'rgb(255,255,255)' : 'rgb(0, 0, 0)';
         const themeVal = theme == 'dark' ? 'light' : 'dark';
         setTheme(themeVal);
+        document.documentElement.style.setProperty('--background-color', color);
     }
 
     const todayDateObj = Object.assign(emptyDateObject, { date: today });
