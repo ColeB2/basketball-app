@@ -1,0 +1,40 @@
+.button-container {
+    display: inline;
+    float: left;
+
+    min-width: 80px;
+    min-height: 86px;
+    width: 80px;
+    height: var(--header-height);
+
+    background-color: var(--ticker-date-color);
+}
+
+.toggle {
+    /* display: inline-flex; */
+    display: flex;
+    color: black;
+    /* justify-content: center; */
+    /* padding: 10px; */
+    justify-content: center;
+    /* border: 1px solid black;
+    border-radius: 50%; */
+    
+
+    width: 32px;
+    height: 32px;
+
+    cursor: pointer;
+}
+
+.toggle:hover {
+    background-color: bisque;
+    border-radius: 50%;
+    border-color: aqua;
+}
+
+.button-image {
+    align-self: center;
+    width: 24px;
+    height: 24px;
+}
