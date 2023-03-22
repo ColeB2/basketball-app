@@ -1,6 +1,4 @@
 //TODO FIX ALL ESLINT SKIPS
-// eslint-disable-next-line
-import { playerStatsDataType } from '../../types/basketballdata';
 
 import './BoxScore.css';
 
@@ -39,8 +37,6 @@ const columns = [
 ];
 
 const BoxScore = (props: BoxScoreProps) => {
-    // const [tableData, setTableData] = useState(tableData)
-
     return (
         props &&
         props.data.keys && (

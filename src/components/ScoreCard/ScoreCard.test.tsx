@@ -1,5 +1,5 @@
-import { describe } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import ScoreCard from './ScoreCard';
 import testData from '../test_data/testData';
@@ -78,5 +78,20 @@ describe('ScoreCard', () => {
         for (let i = 0; i < colHeader.length; i++) {
             expect(colHeader[i]).toHaveTextContent(cellContent[i]);
         }
+    });
+    it('ScoreCard calls handleClick function on click', () => {
+        const handleClick = vi.fn();
+        render(
+            <ScoreCard
+                key={testData.basketballTestData.id}
+                handleClick={() => handleClick()}
+                {...testData.basketballTestData}
+            />
+        );
+        const tableRole = screen.getByRole('table');
+        fireEvent.click(tableRole);
+        expect(handleClick).toHaveBeenCalled();
+        fireEvent.click(tableRole);
+        expect(handleClick).toHaveBeenCalledTimes(2);
     });
 });

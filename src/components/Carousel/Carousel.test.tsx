@@ -1,5 +1,5 @@
-import { describe } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 import Carousel from './Carousel';
 import testData from '../test_data/testData';
@@ -68,5 +68,27 @@ describe('Carousel', () => {
         // tableRole 1: SAT DEC 17
         expect(tableRole[0]).toHaveTextContent('TOR110');
         expect(tableRole[1]).toHaveTextContent('SAT');
+    });
+    it('Carousel items can be clicked', () => {
+        // Arrange
+        const handleClick = vi.fn();
+        render(
+            <Carousel
+                key={1}
+                data={[testData.basketballTestData, testData.testDateObj]}
+                meta={{}}
+                handleClick={handleClick}
+            />
+        );
+        // Act
+        // Expect
+        const tableRole = screen.getAllByRole('table');
+        // Click all the tables. Only ScoreCard has handle click function
+        for (let i = 0; i < tableRole.length; i++) {
+            const table = tableRole[i];
+            fireEvent.click(table);
+        }
+        // Should be 1 as DateCard is not clickable.
+        expect(handleClick).toBeCalledTimes(1);
     });
 });

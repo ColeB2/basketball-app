@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 
@@ -32,8 +30,6 @@ const Carousel = ({ data, handleClick }: CarouselProps) =>
                 spaceBetween={0}
                 freeMode={true}
                 slidesPerView={'auto'}
-                // loop={true}
-                // slidesPerGroupAuto
                 slidesPerGroupAuto={true}
                 pagination={{
                     clickable: true,

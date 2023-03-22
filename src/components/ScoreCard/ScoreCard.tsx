@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { teamObject } from '../../types/basketballdata';
 import NBAIconsMap from '../../helpers/nbaiconsmap';
 
