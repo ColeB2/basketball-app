@@ -25,7 +25,8 @@ interface basketballData {
 
 // Data type used inside playerStatsDataType
 interface gameStatsDataType {
-    date: Date;
+    // date: Date;
+    date: string;
     home_team_id: number;
     home_team_score: number;
     id: number;

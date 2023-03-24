@@ -2,7 +2,7 @@ import { describe, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import Carousel from './Carousel';
-import testData from '../test_data/testData';
+import testData from '../../tests/testData';
 
 describe('Carousel', () => {
     it('Renders Carousel component: render inside ScoreCards', () => {

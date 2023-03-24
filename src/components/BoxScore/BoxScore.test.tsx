@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 import BoxScore from './BoxScore';
 
-import testData from '../test_data/testData';
+import testData from '../../tests/testData';
 import { playerStatsDataType } from '../../types/basketballdata';
 
 describe('BoxScore', () => {

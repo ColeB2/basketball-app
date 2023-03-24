@@ -2,7 +2,7 @@ import { describe, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import ScoreCard from './ScoreCard';
-import testData from '../test_data/testData';
+import testData from '../../tests/testData';
 
 describe('ScoreCard', () => {
     it('Renders ScoreCard component', () => {

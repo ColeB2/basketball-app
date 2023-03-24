@@ -1,11 +1,12 @@
+import emptyDateObject from '../types/basketballdata';
+
 import {
     teamObject,
     gameStatsDataType,
     basketballData,
     playerStatsDataType,
     playerInfoDataType,
-} from '../../types/basketballdata';
-import emptyDateObject from '../../types/basketballdata';
+} from '../types/basketballdata';
 
 const raptorsTeam: teamObject = {
     abbreviation: 'TOR',
@@ -665,4 +666,12 @@ export default {
     basketballTestData,
     boxscoreData,
     testDateObj,
+};
+
+export const MOCK_GAMES_DATA = {
+    data: [basketballTestData],
+};
+
+export const MOCK_BOXSCORE_DATA = {
+    data: [boxscoreData, boxscoreData],
 };
