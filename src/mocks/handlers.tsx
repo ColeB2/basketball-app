@@ -1,7 +1,9 @@
 import { rest } from 'msw';
+// MOCK APIS FOR TESTING
 import YEST_API from '../tests/yesterdayGameData';
 import TODAY_API from '../tests/todayGameData';
 import BOXSCORE_API from '../tests/todayGameBoxscoreData';
+// TYPES
 import { boxscoreDataType } from '../types/basketballdata';
 
 const apiDateCalls: string[] = [];
