@@ -1,18 +1,7 @@
-import {
-    boxscoreDataType,
-    gameStatsDataType,
-} from '../../types/basketballdata';
-
-interface customGameType extends Omit<gameStatsDataType, 'date'> {
-    date: string;
-}
-
-interface customBoxscoreType extends Omit<boxscoreDataType, 'game'> {
-    game: customGameType;
-}
+import { boxscoreDataType } from '../../types/basketballdata';
 
 //Game ID 858450
-export const game1: customBoxscoreType = {
+export const game1: boxscoreDataType = {
     data: [
         {
             id: 13810495,
@@ -1851,11 +1840,4 @@ export const game1: customBoxscoreType = {
             turnover: 3,
         },
     ],
-    meta: {
-        total_pages: 1,
-        current_page: 1,
-        next_page: null,
-        per_page: 100,
-        total_count: 34,
-    },
 };

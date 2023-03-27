@@ -1,4 +1,7 @@
-export const game2 = {
+import { boxscoreDataType } from '../../types/basketballdata';
+
+//Game ID 858477
+export const game2: boxscoreDataType = {
     data: [
         {
             id: 13810463,
