@@ -94,7 +94,7 @@ function App() {
                             currentGameID.toString()
                     )
                     .then((res) => {
-                        console.log('CGID---', currentGameID)
+                        console.log('CGID---', currentGameID);
                         console.log('-------GETTING Response stats--', res);
                         const boxScoreData = res.data;
                         if (boxScoreData.data.length !== 0) {

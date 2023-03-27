@@ -29,10 +29,11 @@ const warriorsTeam: teamObject = {
 };
 
 const testDate = new Date('2022-12-17T07:00:00.000Z');
+const testDateStr = '2022-12-17T07:00:00.000Z';
 const testDateObj = Object.assign(emptyDateObject, { date: testDate });
 
 const gameStatsTestData: gameStatsDataType = {
-    date: testDate,
+    date: testDateStr,
     home_team_id: 28,
     home_team_score: 110,
     id: 857802,
