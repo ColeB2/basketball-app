@@ -1,5 +1,4 @@
 import { rest } from 'msw';
-import { MOCK_GAMES_DATA, MOCK_BOXSCORE_DATA } from '../tests/testData';
 import YEST_API from '../tests/yesterdayGameData';
 import TODAY_API from '../tests/todayGameData';
 import BOXSCORE_API from '../tests/todayGameBoxscoreData';
@@ -19,12 +18,6 @@ const boxScoreId: apiDataTypes = {
 };
 
 export const restHandlers = [
-    // rest.get('https://www.balldontlie.io/api/v1/games', (req, res, ctx) => {
-    //     return res(ctx.status(200), ctx.json(MOCK_GAMES_DATA));
-    // }),
-    // rest.get('https://www.balldontlie.io/api/v1/games', (req, res, ctx) => {
-    //     return res(ctx.status(200), ctx.json(YEST_API));
-    // }),
     rest.get('https://www.balldontlie.io/api/v1/games', (req, res, ctx) => {
         const date: string | null = req.url.searchParams.get('dates[]');
         if (date) {
@@ -43,7 +36,4 @@ export const restHandlers = [
         }
         return res(ctx.status(200), ctx.json({ data: [] }));
     }),
-    // rest.get('https://www.balldontlie.io/api/v1/stats', (req, res, ctx) => {
-    //     return res(ctx.status(200), ctx.json(MOCK_BOXSCORE_DATA));
-    // }),
 ];
