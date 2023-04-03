@@ -81,7 +81,6 @@ function App() {
             }
         };
         fetchTodaysGames();
-        console.log('Mocking here?-----------------------');
     }, []);
 
     // current Game Boxscore data --> updates when gameId changes.
@@ -94,8 +93,6 @@ function App() {
                             currentGameID.toString()
                     )
                     .then((res) => {
-                        console.log('CGID---', currentGameID);
-                        console.log('-------GETTING Response stats--', res);
                         const boxScoreData = res.data;
                         if (boxScoreData.data.length !== 0) {
                             const home_team_id =
@@ -145,7 +142,7 @@ function App() {
             <div className="App">
                 <div className="header-container">
                     <Misc theme={theme} handleClick={toggleTheme} />
-                    {yestStats.data && todayStats.data ? (
+                    {yestStats.data && todayStats.data && (
                         <Carousel
                             key={1}
                             // data={test.data}
@@ -157,24 +154,7 @@ function App() {
                             meta={yestStats.meta}
                             handleClick={selectGameClick}
                         />
-                    ) : (
-                        <div>
-                            <h5 className="loader">Loading</h5>
-                        </div>
                     )}
-                    {/* {yestStats.data && todayStats.data && (
-                        <Carousel
-                            key={1}
-                            // data={test.data}
-                            data={[
-                                ...yestStats.data,
-                                todayDateObj,
-                                ...todayStats.data,
-                            ]}
-                            meta={yestStats.meta}
-                            handleClick={selectGameClick}
-                        />
-                    )} */}
                 </div>
                 {/* BoxScore --> App --> splits home/away inside component? */}
                 <div className="boxscore-containers">
