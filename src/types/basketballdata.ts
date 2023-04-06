@@ -74,6 +74,12 @@ interface playerStatsDataType {
     player: playerInfoDataType;
     game: gameStatsDataType;
     team: teamObject;
+    [key: string]:
+        | number
+        | string
+        | playerInfoDataType
+        | gameStatsDataType
+        | teamObject;
 }
 
 interface basketballDataType {
