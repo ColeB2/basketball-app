@@ -5,6 +5,7 @@ import BoxScore from './BoxScore';
 
 import testData from '../../tests/testData';
 import { playerStatsDataType } from '../../types/basketballdata';
+import { columns } from './BoxScore';
 
 describe('BoxScore', () => {
     it('Renders BoxScore component', () => {
@@ -30,10 +31,8 @@ describe('BoxScore', () => {
         render(<BoxScore data={testData.boxscoreData} />);
         //Act
         //Expect
-        // const role = screen.getAllByRole('colgroup');
         testData.boxscoreData.forEach((playerStats) => {
             const player = playerStats.player;
-            // const name = `${player.last_name}, ${player.first_name}`;
             const first = player.first_name.replace(/\b(\w)\w+/g, '$1.');
             const name = `${first} ${player.last_name}`;
             const row = screen.getByText(name).closest('tr');
@@ -53,13 +52,6 @@ describe('BoxScore', () => {
                     );
                 }
             }
-
-            // Object.entries(playerStats).forEach(([key, value], idx) => {
-            //     console.log(key, value, idx);
-            // });
-
-            // const row = screen.getByText(playerStats.player.last_name);
-            // console.log(row.textContent);
         });
     });
 });
@@ -87,32 +79,4 @@ const boxscoreHeaders = [
     'STL',
     'TO',
     'PF',
-];
-
-const columns = [
-    {
-        label: 'First',
-        accessor: 'first_name',
-        accessor2: 'last_name',
-        player: true,
-    },
-    // {label: "Last", accessor: "last_name", player: true},
-    { label: 'MIN', accessor: 'min' },
-    { label: 'PTS', accessor: 'pts' },
-    { label: 'FGM', accessor: 'fgm' },
-    { label: 'FGA', accessor: 'fga' },
-    { label: 'FG%', accessor: 'fg_pct', rate: true },
-    { label: '3PM', accessor: 'fg3m' },
-    { label: '3PA', accessor: 'fg3a' },
-    { label: '3P%', accessor: 'fg3_pct', rate: true },
-    { label: 'FTM', accessor: 'ftm' },
-    { label: 'FTA', accessor: 'fta' },
-    { label: 'FT%', accessor: 'ft_pct', rate: true },
-    { label: 'OR', accessor: 'oreb' },
-    { label: 'REB', accessor: 'reb' },
-    { label: 'AST', accessor: 'ast' },
-    { label: 'BLK', accessor: 'blk' },
-    { label: 'STL', accessor: 'stl' },
-    { label: 'TO', accessor: 'turnover' },
-    { label: 'PF', accessor: 'pf' },
 ];

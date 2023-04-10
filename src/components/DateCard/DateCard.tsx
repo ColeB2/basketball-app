@@ -1,7 +1,7 @@
 import { basketballData } from '../../types/basketballdata';
 import './DateCard.css';
 
-const months = [
+export const monthsList = [
     'JAN',
     'FEB',
     'MAR',
@@ -16,7 +16,7 @@ const months = [
     'DEC',
 ];
 
-const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+export const daysList = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 interface DateCardProps {
     data: basketballData;
@@ -27,22 +27,17 @@ const DateCard = ({ data }: DateCardProps) =>
         //uses hardcoded 8Xpx height for date-card-table
         <div className="date-card">
             <table className="date-card-table">
-                <thead>
-                    <tr></tr>
-                </thead>
                 <tbody className="">
                     <tr>
-                        <td>{days[data.date.getDay()]}</td>
+                        <td>{daysList[data.date.getDay()]}</td>
                     </tr>
                     <tr>
                         <td>
-                            {months[data.date.getMonth()]} {data.date.getDate()}
+                            {monthsList[data.date.getMonth()]}{' '}
+                            {data.date.getDate()}
                         </td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr></tr>
-                </tfoot>
             </table>
         </div>
     );
