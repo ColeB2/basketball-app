@@ -235,7 +235,7 @@ describe('App', () => {
             }
         }
     });
-    it('Renderered boxscore data changes when clicking different game', async () => {
+    it('Renderered boxscore title changes when clicking different game', async () => {
         render(<App />);
 
         await screen.findAllByRole('table');
@@ -258,19 +258,17 @@ describe('App', () => {
         let currentAwayBoxscoreTitle = screen.getByRole('heading', {
             name: awayTeamName,
         }).textContent;
-        console.log(currentHomeBoxscoreTitle);
 
         // Click another table and check that data changes
         for (let i = 1; i < yesterdayGameData.data.length; i++) {
+            // Click all boxscores, wait for them to change
             fireEvent.click(tables[i]);
-            console.log('before', i, currentHomeBoxscoreTitle);
             await waitFor(() => {
                 const teamNameChange =
                     yesterdayGameData.data[i].home_team.full_name;
-                console.log(teamNameChange, currentHomeBoxscoreTitle);
                 screen.getByRole('heading', { name: teamNameChange });
             });
-            console.log(i, currentHomeBoxscoreTitle);
+            // After change - get headers based on what data says they should be
             const newHomeTeamName =
                 yesterdayGameData.data[i].home_team.full_name;
             const newAwayTeamName =
@@ -281,13 +279,97 @@ describe('App', () => {
             const newAwayBoxscoreTitle = screen.getByRole('heading', {
                 name: newAwayTeamName,
             }).textContent;
-            console.log(i, newHomeBoxscoreTitle, currentHomeBoxscoreTitle);
+            // Check that headers changed, and weren't the previous ones.
             expect(newHomeBoxscoreTitle).not.toBe(currentHomeBoxscoreTitle);
             expect(newAwayBoxscoreTitle).not.toBe(currentAwayBoxscoreTitle);
             awayTeamName = newAwayTeamName;
             homeTeamName = newHomeTeamName;
             currentHomeBoxscoreTitle = newHomeBoxscoreTitle;
             currentAwayBoxscoreTitle = newAwayBoxscoreTitle;
+        }
+    });
+    it('Renderered boxscore data changes when clicking different game', async () => {
+        render(<App />);
+
+        await screen.findAllByRole('table');
+        const tables = screen.getAllByRole('table');
+        // After loading we should have 15 tables;
+        // 4 today games, 1 date table/ 10 tomorrow games.
+        fireEvent.click(tables[0]);
+        // Click on tables and wait for the other boxscores tables to load.
+        await waitFor(() =>
+            expect(screen.getAllByRole('table').length).toBeGreaterThan(
+                tables.length
+            )
+        );
+        // Loop through remaning games
+        const allGameData = Object.values(todayGameBoxscoreData);
+        for (let i = 1; i < yesterdayGameData.data.length; i++) {
+            // Click all boxscores, wait for them to change
+            fireEvent.click(tables[i]);
+            await waitFor(() => {
+                const teamNameChange =
+                    yesterdayGameData.data[i].home_team.full_name;
+                screen.getByRole('heading', { name: teamNameChange });
+            });
+            //After tables check data for rem 3 games.
+            const tablesPostClick = screen.getAllByRole('table');
+            const homeTeamBoxscore =
+                tablesPostClick[tablesPostClick.length - 1];
+            const awayTeamBoxscore =
+                tablesPostClick[tablesPostClick.length - 2];
+            const homeTeam = homeTeamBoxscore.querySelectorAll('tr');
+            const awayTeam = awayTeamBoxscore.querySelectorAll('tr');
+            const gameData = allGameData[i];
+            const homeId = gameData.data[0].game.home_team_id;
+            const awayId = gameData.data[0].game.visitor_team_id;
+            // Process the data to how it should appear in the table.
+            const homeData = gameData.data.filter(
+                (player) => player.team.id === homeId
+            );
+            const awayData = gameData.data.filter(
+                (player) => player.team.id === awayId
+            );
+            homeData.sort(minutesSort);
+            awayData.sort(minutesSort);
+            // Home Team Data
+            for (let i = 1; i < homeTeam.length; i++) {
+                const player = homeTeam[i];
+                const statline = player.querySelectorAll('td');
+                for (let j = 1; j < statline.length; j++) {
+                    const accessor = columns[j].accessor;
+                    let stat = homeData[i - 1][accessor];
+                    if (
+                        (typeof stat === 'string' ||
+                            typeof stat === 'number') &&
+                        columns[j].rate
+                    ) {
+                        let rate = parseFloat(String(stat));
+                        rate *= 100;
+                        stat = rate.toFixed(1);
+                    }
+                    expect(statline[j].textContent).toBe(String(stat));
+                }
+            }
+            // Away Data
+            for (let i = 1; i < awayTeam.length; i++) {
+                const player = awayTeam[i];
+                const statline = player.querySelectorAll('td');
+                for (let j = 1; j < statline.length; j++) {
+                    const accessor = columns[j].accessor;
+                    let stat = awayData[i - 1][accessor];
+                    if (
+                        (typeof stat === 'string' ||
+                            typeof stat === 'number') &&
+                        columns[j].rate
+                    ) {
+                        let rate = parseFloat(String(stat));
+                        rate *= 100;
+                        stat = rate.toFixed(1);
+                    }
+                    expect(statline[j].textContent).toBe(String(stat));
+                }
+            }
         }
     });
 });
