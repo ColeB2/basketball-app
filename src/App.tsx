@@ -10,7 +10,7 @@ import {
     playerStatsDataType,
     gameDataType,
 } from './types/basketballdata';
-import { minutesSort } from './helpers/helperFunctions';
+import { formatTimeInET, minutesSort } from './helpers/helperFunctions';
 
 import basketballApi from './api/basketball';
 
@@ -43,6 +43,7 @@ function App() {
                         // console.log('yest res----', res);
                         res.data.data.map((item: basketballData) => {
                             item.dateObj = false;
+                            item.status = formatTimeInET(item.status);
                         });
                         setYestStats(res.data);
                     });
@@ -70,6 +71,7 @@ function App() {
                         // console.log('today res----', res);
                         res.data.data.map((item: basketballData) => {
                             item.dateObj = false;
+                            item.status = formatTimeInET(item.status);
                         });
                         setTodayStats(res.data);
                     });
