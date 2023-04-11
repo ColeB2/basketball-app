@@ -21,8 +21,11 @@ describe('BoxScore', () => {
         //Act
         //Expect
         const role = screen.getAllByRole('columnheader');
-        for (let i = 0; i < role.length; i++) {
-            expect(role[i]).toHaveTextContent(boxscoreHeaders[i]);
+        // Check intiial role is teams city value.
+        expect(role[0]).toHaveTextContent(testData.boxscoreData[0].team.city);
+        // Loop to check the headers of our boxscore are proper columns.
+        for (let i = 1; i < role.length; i++) {
+            expect(role[i]).toHaveTextContent(columns[i].label);
         }
     });
 
@@ -55,28 +58,3 @@ describe('BoxScore', () => {
         });
     });
 });
-
-//////////////////////////////
-// Mock Testing Data Answers//
-//////////////////////////////
-const boxscoreHeaders = [
-    'Toronto',
-    'MIN',
-    'PTS',
-    'FGM',
-    'FGA',
-    'FG%',
-    '3PM',
-    '3PA',
-    '3P%',
-    'FTM',
-    'FTA',
-    'FT%',
-    'OR',
-    'REB',
-    'AST',
-    'BLK',
-    'STL',
-    'TO',
-    'PF',
-];
