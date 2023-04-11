@@ -73,6 +73,33 @@ function App() {
                             item.dateObj = false;
                             item.status = formatTimeInET(item.status);
                         });
+                        // console.log(res);
+                        // console.log(res.data);
+                        const sortedData = res.data.data.sort(
+                            (a: any, b: any) => {
+                                const timeA = a.status.split(' ')[0];
+                                const timeB = b.status.split(' ')[0];
+
+                                const [hourA, minuteA] = timeA
+                                    .split(':')
+                                    .map(Number);
+                                const [hourB, minuteB] = timeB
+                                    .split(':')
+                                    .map(Number);
+
+                                const timeValueA =
+                                    hourA >= 12
+                                        ? (hourA - 12) * 60 + minuteA
+                                        : hourA * 60 + minuteA;
+                                const timeValueB =
+                                    hourB >= 12
+                                        ? (hourB - 12) * 60 + minuteB
+                                        : hourB * 60 + minuteB;
+
+                                return timeValueA - timeValueB;
+                            }
+                        );
+                        console.log('sorted data', sortedData);
                         setTodayStats(res.data);
                     });
             } catch (err) {
