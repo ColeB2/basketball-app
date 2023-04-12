@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import ScoreCard from './ScoreCard';
 import testData from '../../tests/testData';
+import { formatTimeInET } from '../../helpers/helperFunctions';
 
 describe('ScoreCard', () => {
     it('Renders ScoreCard component', () => {
@@ -51,6 +52,24 @@ describe('ScoreCard', () => {
         );
         const colHeader = screen.getByRole('columnheader');
         expect(colHeader).toHaveTextContent('7:00 ET');
+        //Return item back to normal state
+        testData.basketballTestData.time = 'Final';
+    });
+
+    it('Scorecard render proper output of formatTimeInEt function', () => {
+        let time = '2023-04-11T23:30:00Z';
+        time = formatTimeInET(time);
+        testData.basketballTestData.time = time;
+        const handleClick = () => undefined;
+        render(
+            <ScoreCard
+                key={testData.basketballTestData.id}
+                handleClick={() => handleClick()}
+                {...testData.basketballTestData}
+            />
+        );
+        const colHeader = screen.getByRole('columnheader');
+        expect(colHeader).toHaveTextContent('7:30 PM EDT');
         //Return item back to normal state
         testData.basketballTestData.time = 'Final';
     });
