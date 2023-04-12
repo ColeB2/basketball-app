@@ -10,7 +10,7 @@ interface teamObject {
 
 interface basketballData {
     dateObj?: boolean;
-    date: Date;
+    date: Date | string;
     home_team: teamObject;
     home_team_score: number;
     id: number;

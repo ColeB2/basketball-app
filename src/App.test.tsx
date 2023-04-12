@@ -4,7 +4,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import todayGameData from './tests/todayGameData';
 import yesterdayGameData from './tests/yesterdayGameData';
 import todayGameBoxscoreData from './tests/todayGameBoxscoreData';
-import { minutesSort } from './helpers/helperFunctions';
+import { gameStartTimeSort, minutesSort } from './helpers/helperFunctions';
 import { columns } from './components/BoxScore/BoxScore';
 import { daysList, monthsList } from './components/DateCard/DateCard';
 
@@ -97,6 +97,9 @@ describe('App', () => {
         const expectedTableLength =
             yesterdayGameData.data.length + todayGameData.data.length + 1;
         expect(tables.length).toBe(expectedTableLength);
+
+        // sort our data like the app does before testing.
+        todayGameData.data.sort(gameStartTimeSort);
 
         for (
             let i = yesterdayGameData.data.length + 1;
