@@ -1,11 +1,12 @@
+import emptyDateObject from '../types/basketballdata';
+
 import {
     teamObject,
     gameStatsDataType,
     basketballData,
     playerStatsDataType,
     playerInfoDataType,
-} from '../../types/basketballdata';
-import emptyDateObject from '../../types/basketballdata';
+} from '../types/basketballdata';
 
 const raptorsTeam: teamObject = {
     abbreviation: 'TOR',
@@ -28,10 +29,11 @@ const warriorsTeam: teamObject = {
 };
 
 const testDate = new Date('2022-12-17T07:00:00.000Z');
+const testDateStr = '2022-12-17T07:00:00.000Z';
 const testDateObj = Object.assign(emptyDateObject, { date: testDate });
 
 const gameStatsTestData: gameStatsDataType = {
-    date: testDate,
+    date: testDateStr,
     home_team_id: 28,
     home_team_score: 110,
     id: 857802,
@@ -665,4 +667,12 @@ export default {
     basketballTestData,
     boxscoreData,
     testDateObj,
+};
+
+export const MOCK_GAMES_DATA = {
+    data: [basketballTestData],
+};
+
+export const MOCK_BOXSCORE_DATA = {
+    data: [boxscoreData, boxscoreData],
 };

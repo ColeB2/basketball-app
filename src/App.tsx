@@ -10,16 +10,17 @@ import {
     playerStatsDataType,
     gameDataType,
 } from './types/basketballdata';
-import { minutesSort } from './helpers/helperFunctions';
+import {
+    formatTimeInET,
+    gameStartTimeSort,
+    minutesSort,
+} from './helpers/helperFunctions';
 
-import axios from 'axios';
-
-const baseURL = 'https://www.balldontlie.io/api/v1/games';
-const baseGameURL =
-    'https://www.balldontlie.io/api/v1/stats?per_page=100&game_ids[]=';
+import basketballApi from './api/basketball';
 
 function App() {
     const [theme, setTheme] = useState('light');
+
     const [yestStats, setYestStats] = useState<basketballDataType>(
         {} as basketballDataType
     );
@@ -36,15 +37,28 @@ function App() {
     const yestYear = yest.getFullYear();
     const yestMonth = yest.getMonth() + 1;
     const yestDay = yest.getDate();
-    const dateStr = `${yestYear}-${yestMonth}-${yestDay}`;
+    const yestStr = `${yestYear}-${yestMonth}-${yestDay}`;
     useEffect(() => {
-        // eslint-disable-next-line
-        axios.get(baseURL + "?dates[]=" + dateStr).then((response:any) => {
-            response.data.data.map((item: basketballData) => {
-                item.dateObj = false;
-            });
-            setYestStats(response.data);
-        });
+        const fetchYesterdayGames = async () => {
+            try {
+                await basketballApi
+                    .get('/games?dates[]=' + yestStr)
+                    .then((res) => {
+                        // console.log('yest res----', res);
+                        res.data.data.map((item: basketballData) => {
+                            item.dateObj = false;
+                            item.status = formatTimeInET(item.status);
+                        });
+                        setYestStats(res.data);
+                    });
+            } catch (err) {
+                let message;
+                if (err instanceof Error) message = err.message;
+                else message;
+                console.log(message);
+            }
+        };
+        fetchYesterdayGames();
     }, []);
 
     const today = new Date();
@@ -53,47 +67,69 @@ function App() {
     const todayDay = today.getDate();
     const todayStr = `${todayYear}-${todayMonth}-${todayDay}`;
     useEffect(() => {
-        // TODO: Fix all eslint-disable-next-lines that is the response:any fix.
-        // eslint-disable-next-line
-        axios.get(baseURL + "?dates[]=" + todayStr).then((response:any) => {
-            response.data.data.map((item: basketballData) => {
-                item.dateObj = false;
-            });
-            // TODO Work on sorting Today game data by start time.
-            // Also work on implementing Time left in quarter.
-            // console.log('Testing sorting data',response.data)
-            // const todayData = [].concat(response.data.data)
-            // .sort((a,b) => a["status"] < b["status"] ? 1 : -1)
-
-            setTodayStats(response.data);
-        });
+        const fetchTodaysGames = async () => {
+            try {
+                await basketballApi
+                    .get('/games?dates[]=' + todayStr)
+                    .then((res) => {
+                        // console.log('today res----', res);
+                        res.data.data.map((item: basketballData) => {
+                            item.dateObj = false;
+                            item.status = formatTimeInET(item.status);
+                        });
+                        res.data.data.sort(gameStartTimeSort);
+                        setTodayStats(res.data);
+                    });
+            } catch (err) {
+                let message;
+                if (err instanceof Error) message = err.message;
+                else message;
+                console.log(message);
+            }
+        };
+        fetchTodaysGames();
     }, []);
 
     // current Game Boxscore data --> updates when gameId changes.
     useEffect(() => {
-        // eslint-disable-next-line
-        axios.get(baseGameURL + currentGameID.toString()).then((response:any) => {
-                const boxScoreData = response.data;
-                if (boxScoreData.data.length !== 0) {
-                    const home_team_id = boxScoreData.data[0].game.home_team_id;
-                    const away_team_id =
-                        boxScoreData.data[0].game.visitor_team_id;
-                    const home_team = boxScoreData.data.filter(
-                        (player: playerStatsDataType) =>
-                            player.team.id === home_team_id
-                    );
-                    const away_team = boxScoreData.data.filter(
-                        (player: playerStatsDataType) =>
-                            player.team.id === away_team_id
-                    );
-                    home_team.sort(minutesSort);
-                    away_team.sort(minutesSort);
-                    setCurrentGameData({
-                        home_team: home_team,
-                        away_team: away_team,
+        const fetchBoxscore = async () => {
+            try {
+                await basketballApi
+                    .get(
+                        '/stats?per_page=100&game_ids[]=' +
+                            currentGameID.toString()
+                    )
+                    .then((res) => {
+                        const boxScoreData = res.data;
+                        if (boxScoreData.data.length !== 0) {
+                            const home_team_id =
+                                boxScoreData.data[0].game.home_team_id;
+                            const away_team_id =
+                                boxScoreData.data[0].game.visitor_team_id;
+                            const home_team = boxScoreData.data.filter(
+                                (player: playerStatsDataType) =>
+                                    player.team.id === home_team_id
+                            );
+                            const away_team = boxScoreData.data.filter(
+                                (player: playerStatsDataType) =>
+                                    player.team.id === away_team_id
+                            );
+                            home_team.sort(minutesSort);
+                            away_team.sort(minutesSort);
+                            setCurrentGameData({
+                                home_team: home_team,
+                                away_team: away_team,
+                            });
+                        }
                     });
-                }
-            });
+            } catch (err) {
+                let message;
+                if (err instanceof Error) message = err.message;
+                else message;
+                console.log(message);
+            }
+        };
+        fetchBoxscore();
     }, [currentGameID]);
 
     function selectGameClick(id: number) {

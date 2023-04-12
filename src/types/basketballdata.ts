@@ -10,7 +10,7 @@ interface teamObject {
 
 interface basketballData {
     dateObj?: boolean;
-    date: Date;
+    date: Date | string;
     home_team: teamObject;
     home_team_score: number;
     id: number;
@@ -25,7 +25,8 @@ interface basketballData {
 
 // Data type used inside playerStatsDataType
 interface gameStatsDataType {
-    date: Date;
+    // date: Date;
+    date: string;
     home_team_id: number;
     home_team_score: number;
     id: number;
@@ -73,6 +74,12 @@ interface playerStatsDataType {
     player: playerInfoDataType;
     game: gameStatsDataType;
     team: teamObject;
+    [key: string]:
+        | number
+        | string
+        | playerInfoDataType
+        | gameStatsDataType
+        | teamObject;
 }
 
 interface basketballDataType {

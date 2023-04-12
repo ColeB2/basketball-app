@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import DateCard from './DateCard';
-import testData from '../test_data/testData';
+import testData from '../../tests/testData';
 
 describe('Carousel', () => {
     it('Renders DateCard component:', () => {

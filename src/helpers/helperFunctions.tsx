@@ -1,7 +1,40 @@
-import { playerStatsDataType } from '../types/basketballdata';
+import { playerStatsDataType, basketballData } from '../types/basketballdata';
 
 function minutesSort(a: playerStatsDataType, b: playerStatsDataType) {
     return parseInt(b.min) - parseInt(a.min);
 }
 
-export { minutesSort };
+function formatTimeInET(dateString: string) {
+    if (dateString.endsWith('Z')) {
+        const date = new Date(dateString);
+        const estTime = date.toLocaleTimeString('en-US', {
+            timeZone: 'America/New_York',
+            hour12: true,
+            hour: 'numeric',
+            minute: '2-digit',
+            timeZoneName: 'short',
+        });
+        return estTime;
+    } else {
+        return dateString;
+    }
+}
+
+function gameStartTimeSort(a: basketballData, b: basketballData) {
+    // a/b object will have a status which will be a string: XX:XX PM EST
+    // Get the time part only XX:XX
+    const timeA = a.status.split(' ')[0];
+    const timeB = b.status.split(' ')[0];
+    // Split around the colons, hours and minutes
+    const [hourA, minuteA] = timeA.split(':').map(Number);
+    const [hourB, minuteB] = timeB.split(':').map(Number);
+    // Convert 24 hour to 12 and then convert all to minutes for sorting.
+    const timeValueA =
+        hourA >= 12 ? (hourA - 12) * 60 + minuteA : hourA * 60 + minuteA;
+    const timeValueB =
+        hourB >= 12 ? (hourB - 12) * 60 + minuteB : hourB * 60 + minuteB;
+
+    return timeValueA - timeValueB;
+}
+
+export { formatTimeInET, gameStartTimeSort, minutesSort };

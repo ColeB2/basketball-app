@@ -8,7 +8,7 @@ interface BoxScoreProps {
     data: any;
 }
 
-const columns = [
+export const columns = [
     {
         label: 'First',
         accessor: 'first_name',
