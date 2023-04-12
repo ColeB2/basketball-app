@@ -29,12 +29,17 @@ const DateCard = ({ data }: DateCardProps) =>
             <table className="date-card-table">
                 <tbody className="">
                     <tr>
-                        <td>{daysList[data.date.getDay()]}</td>
+                        <td>
+                            {typeof data.date != 'string' &&
+                                daysList[data.date.getDay()]}
+                        </td>
                     </tr>
                     <tr>
                         <td>
-                            {monthsList[data.date.getMonth()]}{' '}
-                            {data.date.getDate()}
+                            {typeof data.date != 'string' &&
+                                monthsList[data.date.getMonth()]}{' '}
+                            {typeof data.date != 'string' &&
+                                data.date.getDate()}
                         </td>
                     </tr>
                 </tbody>
