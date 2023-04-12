@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import todayGameData from './tests/todayGameData';
 import yesterdayGameData from './tests/yesterdayGameData';
-import todayGameBoxscoreData from './tests/todayGameBoxscoreData';
+import todayGameBoxscoreData from './tests/yesterdayGameBoxscoreData';
 import { gameStartTimeSort, minutesSort } from './helpers/helperFunctions';
 import { columns } from './components/BoxScore/BoxScore';
 import { daysList, monthsList } from './components/DateCard/DateCard';
