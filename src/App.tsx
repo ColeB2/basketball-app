@@ -3,7 +3,7 @@ import './App.css';
 import BoxScore from './components/BoxScore/BoxScore';
 import Carousel from './components/Carousel/Carousel';
 import Misc from './components/Misc/Misc';
-import emptyDateObject from './types/basketballdata';
+import { emptyDateObject } from './helpers/helperData';
 import {
     apiGamesDataType,
     apiBoxscoreDataType,

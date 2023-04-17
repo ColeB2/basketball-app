@@ -1,4 +1,4 @@
-import emptyDateObject from '../types/basketballdata';
+import { emptyDateObject } from '../helpers/helperData';
 
 import {
     teamObject,
