@@ -84,7 +84,7 @@ interface playerStatsDataType {
 
 interface basketballDataType {
     data: basketballData[];
-    meta: object;
+    // meta: object;
 }
 
 interface boxscoreDataType {
@@ -92,11 +92,25 @@ interface boxscoreDataType {
 }
 
 interface gameDataType {
-    home_team: boxscoreDataType;
-    away_team: boxscoreDataType;
+    home_team: playerStatsDataType[];
+    away_team: playerStatsDataType[];
+}
+
+interface apiGamesDataType {
+    data: {
+        data: basketballData[];
+    };
+}
+
+interface apiBoxscoreDataType {
+    data: {
+        data: playerStatsDataType[];
+    };
 }
 
 export type {
+    apiGamesDataType,
+    apiBoxscoreDataType,
     basketballDataType,
     basketballData,
     boxscoreDataType,
