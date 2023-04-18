@@ -108,7 +108,7 @@ interface apiBoxscoreDataType {
     };
 }
 
-interface SwiperElement extends HTMLElement {
+interface swiperElement extends HTMLElement {
     swiper: {
         realIndex: number;
     };
@@ -124,6 +124,6 @@ export type {
     gameStatsDataType,
     playerStatsDataType,
     playerInfoDataType,
-    SwiperElement,
+    swiperElement,
     teamObject,
 };
