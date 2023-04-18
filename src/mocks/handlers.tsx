@@ -25,6 +25,7 @@ export const restHandlers = [
         if (date) {
             apiDateCalls.push(date);
         }
+        // First api call will be for yesterday games, so call yest_api.
         if (apiDateCalls[0] === date) {
             return res(ctx.status(200), ctx.json(YEST_API));
         } else {
