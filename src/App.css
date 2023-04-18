@@ -28,6 +28,7 @@ Base CSS
 :root {
     --background-color: rgb(255, 255, 255);
     --header-height: 90px;
+    --misc-box-width: 80px;
 }
 
 * {

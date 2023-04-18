@@ -52,6 +52,9 @@ const Carousel = ({ data, handleClick }: CarouselProps) =>
                         </SwiperSlide>
                     );
                 })}
+                <SwiperSlide key={99}>
+                    <h1>End of Games</h1>
+                </SwiperSlide>
             </Swiper>
         </div>
     );
