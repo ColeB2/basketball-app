@@ -1,10 +1,6 @@
 import yesterdayGameData from '../../src/tests/yesterdayGameData';
-import todayGameData from '../../src/tests/todayGameData';
 import yesterdayGameBoxscoreData from '../../src/tests/yesterdayGameBoxscoreData';
-import {
-    boxscoreDataType,
-    swiperElement,
-} from '../../src/types/basketballdata';
+import { swiperElement } from '../../src/types/basketballdata';
 import { compareBoxscoreData } from '../support/helperFunctions';
 
 describe('The Main Page', () => {
@@ -106,7 +102,6 @@ describe('The Main Page', () => {
         // Expected Data
         const gameData = yesterdayGameBoxscoreData['game1'];
         const awayId = gameData.data[0].game.visitor_team_id;
-        console.log('CALLING CUSTOM FUNCTIONS');
         compareBoxscoreData(awayBoxscore, awayId, gameData);
     });
 
