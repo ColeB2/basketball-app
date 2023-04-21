@@ -2,9 +2,9 @@
     display: inline;
     float: left;
 
-    min-width: 80px;
+    min-width: var(--misc-box-width);
     min-height: 86px;
-    width: 80px;
+    width: var(--misc-box-width);
     height: var(--header-height);
 
     background-color: var(--ticker-date-color);

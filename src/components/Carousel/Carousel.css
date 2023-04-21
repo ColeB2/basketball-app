@@ -1,9 +1,11 @@
 .carousel-container {
     position: fixed;
     background-color: var(--background-color);
-    width: 100%;
+    /* width: 100%; */
     /* width: 90vw; */
     /* width: auto; */
+    /* width: 90%; */
+    width: calc(100% - var(--misc-box-width));
     display: inline;
 }
 
@@ -13,7 +15,7 @@
 }
   
 .swiper-ticker-date {
-    width: 80px;
+    width: var(--misc-box-width);
     height: var(--header-height);
     /* background-color: rgb(215,215,215); */
     background-color: var(--ticker-date-color);

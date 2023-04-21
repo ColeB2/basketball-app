@@ -3,8 +3,10 @@ import './App.css';
 import BoxScore from './components/BoxScore/BoxScore';
 import Carousel from './components/Carousel/Carousel';
 import Misc from './components/Misc/Misc';
-import emptyDateObject from './types/basketballdata';
+import { emptyDateObject } from './helpers/helperData';
 import {
+    apiGamesDataType,
+    apiBoxscoreDataType,
     basketballDataType,
     basketballData,
     playerStatsDataType,
@@ -43,7 +45,7 @@ function App() {
             try {
                 await basketballApi
                     .get('/games?dates[]=' + yestStr)
-                    .then((res) => {
+                    .then((res: apiGamesDataType) => {
                         // console.log('yest res----', res);
                         res.data.data.map((item: basketballData) => {
                             item.dateObj = false;
@@ -71,7 +73,7 @@ function App() {
             try {
                 await basketballApi
                     .get('/games?dates[]=' + todayStr)
-                    .then((res) => {
+                    .then((res: apiGamesDataType) => {
                         // console.log('today res----', res);
                         res.data.data.map((item: basketballData) => {
                             item.dateObj = false;
@@ -99,7 +101,8 @@ function App() {
                         '/stats?per_page=100&game_ids[]=' +
                             currentGameID.toString()
                     )
-                    .then((res) => {
+                    .then((res: apiBoxscoreDataType) => {
+                        // console.log('boxscore, res', res);
                         const boxScoreData = res.data;
                         if (boxScoreData.data.length !== 0) {
                             const home_team_id =
@@ -158,7 +161,7 @@ function App() {
                                 todayDateObj,
                                 ...todayStats.data,
                             ]}
-                            meta={yestStats.meta}
+                            // meta={yestStats.meta}
                             handleClick={selectGameClick}
                         />
                     )}

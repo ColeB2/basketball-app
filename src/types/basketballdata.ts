@@ -84,7 +84,7 @@ interface playerStatsDataType {
 
 interface basketballDataType {
     data: basketballData[];
-    meta: object;
+    // meta: object;
 }
 
 interface boxscoreDataType {
@@ -92,11 +92,31 @@ interface boxscoreDataType {
 }
 
 interface gameDataType {
-    home_team: boxscoreDataType;
-    away_team: boxscoreDataType;
+    home_team: playerStatsDataType[];
+    away_team: playerStatsDataType[];
+}
+
+interface apiGamesDataType {
+    data: {
+        data: basketballData[];
+    };
+}
+
+interface apiBoxscoreDataType {
+    data: {
+        data: playerStatsDataType[];
+    };
+}
+
+interface swiperElement extends HTMLElement {
+    swiper: {
+        realIndex: number;
+    };
 }
 
 export type {
+    apiGamesDataType,
+    apiBoxscoreDataType,
     basketballDataType,
     basketballData,
     boxscoreDataType,
@@ -104,22 +124,6 @@ export type {
     gameStatsDataType,
     playerStatsDataType,
     playerInfoDataType,
+    swiperElement,
     teamObject,
 };
-
-const emptyDateObject = {
-    dateObj: true,
-    date: null,
-    home_team: {},
-    home_team_score: 0,
-    id: 0,
-    period: 0,
-    postseason: 0,
-    season: 0,
-    status: 0,
-    time: 0,
-    visitor_team: 0,
-    visitor_team_score: 0,
-};
-
-export default emptyDateObject;
