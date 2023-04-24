@@ -9,7 +9,4 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          # custom vite --> same npm run dev
-          # npm i --force to handle peerDependencies for 
-          # react logos
-          start: npm i --force && vite
+          start: npm run dev
