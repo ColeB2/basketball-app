@@ -3,6 +3,7 @@ import './App.css';
 import BoxScore from './components/BoxScore/BoxScore';
 import Carousel from './components/Carousel/Carousel';
 import Misc from './components/Misc/Misc';
+import DateSelector from './components/DateSelector/DateSelector';
 import { emptyDateObject } from './helpers/helperData';
 import {
     apiGamesDataType,
@@ -151,7 +152,10 @@ function App() {
         <div className="container" data-theme={theme}>
             <div className="App">
                 <div className="header-container">
-                    <Misc theme={theme} handleClick={toggleTheme} />
+                    <div className="misc-container">
+                        <Misc theme={theme} handleClick={toggleTheme} />
+                        <DateSelector date={today} />
+                    </div>
                     {yestStats.data && todayStats.data && (
                         <Carousel
                             key={1}

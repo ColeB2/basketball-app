@@ -62,3 +62,15 @@ body, html, #root {
     position: fixed;
     z-index: 2;
 }
+
+.misc-container {
+    display: inline;
+    float: left;
+
+    min-width: var(--misc-box-width);
+    min-height: 86px;
+    width: var(--misc-box-width);
+    height: var(--header-height);
+
+    background-color: var(--ticker-date-color);
+}
