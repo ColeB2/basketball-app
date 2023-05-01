@@ -10,6 +10,7 @@ import {
     apiBoxscoreDataType,
     basketballDataType,
     basketballData,
+    cachedBasketballDataType,
     playerStatsDataType,
     gameDataType,
 } from './types/basketballdata';
@@ -21,6 +22,8 @@ import {
 } from './helpers/helperFunctions';
 
 import basketballApi from './api/basketball';
+
+const cachedGameData = {} as cachedBasketballDataType;
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -38,29 +41,49 @@ function App() {
 
     const [chosenDate, setChosenDate] = useState<Date>(new Date());
 
+    // const cachedBoxscoreData = {};
+    // const cachedGameData = {} as cachedBasketballDataType;
+
     useEffect(() => {
         const yest = new Date(chosenDate);
         yest.setDate(yest.getDate() - 1);
-        const fetchYesterdayGames = async () => {
-            try {
-                await basketballApi
-                    .get('/games?dates[]=' + formatAPIDate(yest))
-                    .then((res: apiGamesDataType) => {
-                        // console.log('yest res----', res);
-                        res.data.data.map((item: basketballData) => {
-                            item.dateObj = false;
-                            item.status = formatTimeInET(item.status);
+        console.log(
+            cachedGameData,
+            chosenDate.toString(),
+            chosenDate.toString() in cachedGameData
+        );
+        if (cachedGameData[chosenDate.toString()]) {
+            const res = cachedGameData[chosenDate.toString()];
+            res.data.map((item: basketballData) => {
+                item.dateObj = false;
+                item.status = formatTimeInET(item.status);
+            });
+            console.log('CACHED DATA');
+            setYestStats(res);
+            // return cachedGameData[chosenDate.toString()];
+        } else {
+            const fetchYesterdayGames = async () => {
+                try {
+                    await basketballApi
+                        .get('/games?dates[]=' + formatAPIDate(yest))
+                        .then((res: apiGamesDataType) => {
+                            // console.log('yest res----', res);
+                            res.data.data.map((item: basketballData) => {
+                                item.dateObj = false;
+                                item.status = formatTimeInET(item.status);
+                            });
+                            setYestStats(res.data);
+                            cachedGameData[yest.toString()] = res.data;
                         });
-                        setYestStats(res.data);
-                    });
-            } catch (err) {
-                let message;
-                if (err instanceof Error) message = err.message;
-                else message;
-                console.log(message);
-            }
-        };
-        fetchYesterdayGames();
+                } catch (err) {
+                    let message;
+                    if (err instanceof Error) message = err.message;
+                    else message;
+                    console.log(message);
+                }
+            };
+            fetchYesterdayGames();
+        }
     }, [chosenDate]);
 
     useEffect(() => {
