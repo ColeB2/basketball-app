@@ -153,8 +153,8 @@ function App() {
             <div className="App">
                 <div className="header-container">
                     <div className="misc-container">
-                        <Misc theme={theme} handleClick={toggleTheme} />
                         <DateSelector date={today} />
+                        <Misc theme={theme} handleClick={toggleTheme} />
                     </div>
                     {yestStats.data && todayStats.data && (
                         <Carousel
