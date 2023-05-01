@@ -1,4 +1,5 @@
 import { playerStatsDataType, basketballData } from '../types/basketballdata';
+import { daysList, monthsList } from './helperData';
 
 function minutesSort(a: playerStatsDataType, b: playerStatsDataType) {
     return parseInt(b.min) - parseInt(a.min);
@@ -37,4 +38,20 @@ function gameStartTimeSort(a: basketballData, b: basketballData) {
     return timeValueA - timeValueB;
 }
 
-export { formatTimeInET, gameStartTimeSort, minutesSort };
+function formatAPIDate(date: Date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
+function formatDropdownDate(date: Date) {
+    return `${daysList[date.getDay()]}, ${
+        monthsList[date.getMonth()]
+    } ${date.getDate()}`;
+}
+
+export {
+    formatAPIDate,
+    formatDropdownDate,
+    formatTimeInET,
+    gameStartTimeSort,
+    minutesSort,
+};

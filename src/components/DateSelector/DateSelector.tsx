@@ -1,34 +1,31 @@
 import './DateSelector.css';
 
-import { daysList, monthsList } from '../../helpers/helperData';
+import { formatDropdownDate } from '../../helpers/helperFunctions';
 
 // eslint-disable-next-line
 interface DateSelectorProps {
     date: Date;
+    handleClick: (date: Date) => void;
 }
 function DateSelector(props: DateSelectorProps) {
-    // Currently use for date for today/yesterday date inside <App/>
-    // Probably have a function to reuse this. to get date string.
-    // Date string is our API parameter to get data for that date.
-    const today = props.date;
+    // Get today date constant so date doesn't change when we change
+    // the chosen date prop to select games.
+    const today = new Date();
     const dates = [...Array(7)].map((_, i) => {
         const d = new Date(today);
         d.setDate(d.getDate() - i);
-        const dateYear = d.getFullYear();
-        const dateMonth = d.getMonth() + 1;
-        const dateDay = d.getDate();
-        const dateStr = `${dateYear}-${dateMonth}-${dateDay}`;
-        const displayStr = `${daysList[d.getDay()]}, ${
-            monthsList[d.getMonth()]
-        } ${dateDay}`;
-        return [displayStr, dateStr];
+        return d;
     });
-    console.log(dates);
     return (
         <div className="date-selector-container">
-            <select className="date-selector">
-                {dates.map((item: string[], idx: number) => (
-                    <option key={idx}>{item[0]}</option>
+            <select
+                className="date-selector"
+                onChange={(e) => props.handleClick(new Date(e.target.value))}
+            >
+                {dates.map((item: Date, idx: number) => (
+                    <option value={item.toISOString()} key={idx}>
+                        {formatDropdownDate(item)}
+                    </option>
                 ))}
             </select>
             {/* <p>{dates}</p> */}

@@ -14,6 +14,7 @@ import {
     gameDataType,
 } from './types/basketballdata';
 import {
+    formatAPIDate,
     formatTimeInET,
     gameStartTimeSort,
     minutesSort,
@@ -35,17 +36,15 @@ function App() {
         {} as gameDataType
     );
 
-    const yest = new Date();
-    yest.setDate(yest.getDate() - 1);
-    const yestYear = yest.getFullYear();
-    const yestMonth = yest.getMonth() + 1;
-    const yestDay = yest.getDate();
-    const yestStr = `${yestYear}-${yestMonth}-${yestDay}`;
+    const [chosenDate, setChosenDate] = useState<Date>(new Date());
+
     useEffect(() => {
+        const yest = new Date(chosenDate);
+        yest.setDate(yest.getDate() - 1);
         const fetchYesterdayGames = async () => {
             try {
                 await basketballApi
-                    .get('/games?dates[]=' + yestStr)
+                    .get('/games?dates[]=' + formatAPIDate(yest))
                     .then((res: apiGamesDataType) => {
                         // console.log('yest res----', res);
                         res.data.data.map((item: basketballData) => {
@@ -62,18 +61,13 @@ function App() {
             }
         };
         fetchYesterdayGames();
-    }, []);
+    }, [chosenDate]);
 
-    const today = new Date();
-    const todayYear = today.getFullYear();
-    const todayMonth = today.getMonth() + 1;
-    const todayDay = today.getDate();
-    const todayStr = `${todayYear}-${todayMonth}-${todayDay}`;
     useEffect(() => {
         const fetchTodaysGames = async () => {
             try {
                 await basketballApi
-                    .get('/games?dates[]=' + todayStr)
+                    .get('/games?dates[]=' + formatAPIDate(chosenDate))
                     .then((res: apiGamesDataType) => {
                         // console.log('today res----', res);
                         res.data.data.map((item: basketballData) => {
@@ -91,7 +85,7 @@ function App() {
             }
         };
         fetchTodaysGames();
-    }, []);
+    }, [chosenDate]);
 
     // current Game Boxscore data --> updates when gameId changes.
     useEffect(() => {
@@ -140,6 +134,10 @@ function App() {
         setCurrentGameID(id);
     }
 
+    function setGameDate(date: Date) {
+        setChosenDate(date);
+    }
+
     function toggleTheme() {
         const color = theme == 'dark' ? 'rgb(255,255,255)' : 'rgb(0, 0, 0)';
         const themeVal = theme == 'dark' ? 'light' : 'dark';
@@ -147,13 +145,16 @@ function App() {
         document.documentElement.style.setProperty('--background-color', color);
     }
 
-    const todayDateObj = Object.assign(emptyDateObject, { date: today });
+    const todayDateObj = Object.assign(emptyDateObject, { date: chosenDate });
     return (
         <div className="container" data-theme={theme}>
             <div className="App">
                 <div className="header-container">
                     <div className="misc-container">
-                        <DateSelector date={today} />
+                        <DateSelector
+                            date={chosenDate}
+                            handleClick={setGameDate}
+                        />
                         <Misc theme={theme} handleClick={toggleTheme} />
                     </div>
                     {yestStats.data && todayStats.data && (
