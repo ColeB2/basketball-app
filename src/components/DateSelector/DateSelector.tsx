@@ -1,6 +1,7 @@
 import './DateSelector.css';
 
 import { formatDropdownDate } from '../../helpers/helperFunctions';
+import { getLast7Days } from '../../helpers/helperFunctions';
 
 // eslint-disable-next-line
 interface DateSelectorProps {
@@ -10,13 +11,7 @@ interface DateSelectorProps {
 function DateSelector(props: DateSelectorProps) {
     // Get yesterday date constant so date doesn't change when we change
     // the chosen date prop to select games.
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const dates = [...Array(7)].map((_, i) => {
-        const d = new Date(yesterday);
-        d.setDate(d.getDate() - i);
-        return d;
-    });
+    const dates = getLast7Days();
     return (
         <div className="date-selector-container">
             <select

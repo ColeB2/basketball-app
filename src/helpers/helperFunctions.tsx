@@ -73,6 +73,17 @@ function getCachedBoxscoreData(id: number, cache: cachedBoxscoreDataType) {
     return false;
 }
 
+function getLast7Days() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dates = [...Array(7)].map((_, i) => {
+        const d = new Date(yesterday);
+        d.setDate(d.getDate() - i);
+        return d;
+    });
+    return dates;
+}
+
 export {
     formatAPIDate,
     formatDropdownDate,
@@ -80,5 +91,6 @@ export {
     gameStartTimeSort,
     getCachedScoreData,
     getCachedBoxscoreData,
+    getLast7Days,
     minutesSort,
 };
