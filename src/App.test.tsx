@@ -6,7 +6,7 @@ import yesterdayGameData from './tests/yesterdayGameData';
 import todayGameBoxscoreData from './tests/yesterdayGameBoxscoreData';
 import { gameStartTimeSort, minutesSort } from './helpers/helperFunctions';
 import { columns } from './components/BoxScore/BoxScore';
-import { daysList, monthsList } from './components/DateCard/DateCard';
+import { daysList, monthsList } from './helpers/helperData';
 
 import App from './App';
 
@@ -74,8 +74,8 @@ describe('App', () => {
         const today = new Date();
         const todayMonth = monthsList[today.getMonth()];
         const todayDay = daysList[today.getDay()];
-        const expectedDate = `${todayDay}${todayMonth} ${today.getDate()}`;
-        const expectedMonthDate = `${todayMonth} ${today.getDate()}`;
+        const expectedDate = `${todayDay.toUpperCase()}${todayMonth.toUpperCase()} ${today.getDate()}`;
+        const expectedMonthDate = `${todayMonth.toUpperCase()} ${today.getDate()}`;
         expect(table.textContent).toBe(expectedDate);
 
         // Assert first row of each table is Status --> Final
@@ -83,7 +83,7 @@ describe('App', () => {
         const currentDay = rows[0].querySelector('td');
         const currentMonthDate = rows[1].querySelector('td');
         // const [currentDayRow, currentMonthDateRow] = rows;
-        expect(currentDay?.textContent).toBe(todayDay);
+        expect(currentDay?.textContent).toBe(todayDay.toUpperCase());
         expect(currentMonthDate?.textContent).toBe(expectedMonthDate);
     });
     it('Renders Today Games Properly', async () => {
