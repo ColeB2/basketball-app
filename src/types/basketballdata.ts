@@ -100,6 +100,10 @@ interface gameDataType {
     away_team: playerStatsDataType[];
 }
 
+interface cachedBoxscoreDataType {
+    [idNumber: number]: gameDataType;
+}
+
 interface apiGamesDataType {
     data: {
         data: basketballData[];
@@ -125,6 +129,7 @@ export type {
     basketballData,
     boxscoreDataType,
     cachedBasketballDataType,
+    cachedBoxscoreDataType,
     gameDataType,
     gameStatsDataType,
     playerStatsDataType,

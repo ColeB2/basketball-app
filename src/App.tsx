@@ -10,7 +10,6 @@ import {
     apiBoxscoreDataType,
     basketballDataType,
     basketballData,
-    cachedBasketballDataType,
     playerStatsDataType,
     gameDataType,
 } from './types/basketballdata';
@@ -18,12 +17,13 @@ import {
     formatAPIDate,
     formatTimeInET,
     gameStartTimeSort,
+    getCachedBoxscoreData,
+    getCachedScoreData,
     minutesSort,
 } from './helpers/helperFunctions';
 
 import basketballApi from './api/basketball';
-
-const cachedGameData = {} as cachedBasketballDataType;
+import { cachedBoxscoreData, cachedGameData } from './api/cachedData';
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -44,28 +44,19 @@ function App() {
     // const cachedBoxscoreData = {};
     // const cachedGameData = {} as cachedBasketballDataType;
 
+    // Yesterday's Games Carousel.
     useEffect(() => {
-        const yest = new Date(chosenDate);
-        yest.setDate(yest.getDate() - 1);
-        console.log(
-            cachedGameData,
-            chosenDate.toString(),
-            chosenDate.toString() in cachedGameData
-        );
-        if (cachedGameData[chosenDate.toString()]) {
-            const res = cachedGameData[chosenDate.toString()];
-            res.data.map((item: basketballData) => {
-                item.dateObj = false;
-                item.status = formatTimeInET(item.status);
-            });
-            console.log('CACHED DATA');
-            setYestStats(res);
-            // return cachedGameData[chosenDate.toString()];
+        const yesterday = new Date(chosenDate);
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        const data = getCachedScoreData(yesterday, cachedGameData);
+        if (data) {
+            setYestStats(data);
         } else {
             const fetchYesterdayGames = async () => {
                 try {
                     await basketballApi
-                        .get('/games?dates[]=' + formatAPIDate(yest))
+                        .get('/games?dates[]=' + formatAPIDate(yesterday))
                         .then((res: apiGamesDataType) => {
                             // console.log('yest res----', res);
                             res.data.data.map((item: basketballData) => {
@@ -73,7 +64,8 @@ function App() {
                                 item.status = formatTimeInET(item.status);
                             });
                             setYestStats(res.data);
-                            cachedGameData[yest.toString()] = res.data;
+                            cachedGameData[yesterday.toLocaleDateString()] =
+                                res.data;
                         });
                 } catch (err) {
                     let message;
@@ -86,32 +78,44 @@ function App() {
         }
     }, [chosenDate]);
 
+    // Todays Games Coursel.
     useEffect(() => {
-        const fetchTodaysGames = async () => {
-            try {
-                await basketballApi
-                    .get('/games?dates[]=' + formatAPIDate(chosenDate))
-                    .then((res: apiGamesDataType) => {
-                        // console.log('today res----', res);
-                        res.data.data.map((item: basketballData) => {
-                            item.dateObj = false;
-                            item.status = formatTimeInET(item.status);
+        const data = getCachedScoreData(chosenDate, cachedGameData);
+        if (data) {
+            setTodayStats(data);
+        } else {
+            const fetchTodaysGames = async () => {
+                try {
+                    await basketballApi
+                        .get('/games?dates[]=' + formatAPIDate(chosenDate))
+                        .then((res: apiGamesDataType) => {
+                            // console.log('today res----', res);
+                            res.data.data.map((item: basketballData) => {
+                                item.dateObj = false;
+                                item.status = formatTimeInET(item.status);
+                            });
+                            res.data.data.sort(gameStartTimeSort);
+                            setTodayStats(res.data);
+                            cachedGameData[chosenDate.toLocaleDateString()] =
+                                res.data;
                         });
-                        res.data.data.sort(gameStartTimeSort);
-                        setTodayStats(res.data);
-                    });
-            } catch (err) {
-                let message;
-                if (err instanceof Error) message = err.message;
-                else message;
-                console.log(message);
-            }
-        };
-        fetchTodaysGames();
+                } catch (err) {
+                    let message;
+                    if (err instanceof Error) message = err.message;
+                    else message;
+                    console.log(message);
+                }
+            };
+            fetchTodaysGames();
+        }
     }, [chosenDate]);
 
     // current Game Boxscore data --> updates when gameId changes.
     useEffect(() => {
+        const data = getCachedBoxscoreData(currentGameID, cachedBoxscoreData);
+        if (data) {
+            setCurrentGameData(data);
+        }
         const fetchBoxscore = async () => {
             try {
                 await basketballApi
@@ -141,6 +145,10 @@ function App() {
                                 home_team: home_team,
                                 away_team: away_team,
                             });
+                            cachedBoxscoreData[currentGameID] = {
+                                home_team: home_team,
+                                away_team: away_team,
+                            };
                         }
                     });
             } catch (err) {
