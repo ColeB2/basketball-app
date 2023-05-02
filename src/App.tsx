@@ -25,13 +25,16 @@ import {
 import basketballApi from './api/basketball';
 import { cachedBoxscoreData, cachedGameData } from './api/cachedData';
 
+const initialDate = new Date();
+initialDate.setDate(initialDate.getDate() - 1);
+
 function App() {
     const [theme, setTheme] = useState('light');
 
-    const [yestStats, setYestStats] = useState<basketballDataType>(
+    const [dayOneStats, setDayOneStats] = useState<basketballDataType>(
         {} as basketballDataType
     );
-    const [todayStats, setTodayStats] = useState<basketballDataType>(
+    const [dayTwoStats, setDayTwoStats] = useState<basketballDataType>(
         {} as basketballDataType
     );
     const [currentGameID, setCurrentGameID] = useState<number>(0);
@@ -39,63 +42,26 @@ function App() {
         {} as gameDataType
     );
 
-    const [chosenDate, setChosenDate] = useState<Date>(new Date());
+    const [chosenDate, setChosenDate] = useState<Date>(initialDate);
+    const [dayTwo, setDayTwo] = useState<Date>(new Date());
 
-    // const cachedBoxscoreData = {};
-    // const cachedGameData = {} as cachedBasketballDataType;
-
-    // Yesterday's Games Carousel.
-    useEffect(() => {
-        const yesterday = new Date(chosenDate);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        const data = getCachedScoreData(yesterday, cachedGameData);
-        if (data) {
-            setYestStats(data);
-        } else {
-            const fetchYesterdayGames = async () => {
-                try {
-                    await basketballApi
-                        .get('/games?dates[]=' + formatAPIDate(yesterday))
-                        .then((res: apiGamesDataType) => {
-                            // console.log('yest res----', res);
-                            res.data.data.map((item: basketballData) => {
-                                item.dateObj = false;
-                                item.status = formatTimeInET(item.status);
-                            });
-                            setYestStats(res.data);
-                            cachedGameData[yesterday.toLocaleDateString()] =
-                                res.data;
-                        });
-                } catch (err) {
-                    let message;
-                    if (err instanceof Error) message = err.message;
-                    else message;
-                    console.log(message);
-                }
-            };
-            fetchYesterdayGames();
-        }
-    }, [chosenDate]);
-
-    // Todays Games Coursel.
+    // Day One Stats. Stats next to dropdown date selector.
     useEffect(() => {
         const data = getCachedScoreData(chosenDate, cachedGameData);
         if (data) {
-            setTodayStats(data);
+            setDayOneStats(data);
         } else {
-            const fetchTodaysGames = async () => {
+            const fetchDayOneGames = async () => {
                 try {
                     await basketballApi
                         .get('/games?dates[]=' + formatAPIDate(chosenDate))
                         .then((res: apiGamesDataType) => {
-                            // console.log('today res----', res);
                             res.data.data.map((item: basketballData) => {
                                 item.dateObj = false;
                                 item.status = formatTimeInET(item.status);
                             });
                             res.data.data.sort(gameStartTimeSort);
-                            setTodayStats(res.data);
+                            setDayOneStats(res.data);
                             cachedGameData[chosenDate.toLocaleDateString()] =
                                 res.data;
                         });
@@ -106,7 +72,41 @@ function App() {
                     console.log(message);
                 }
             };
-            fetchTodaysGames();
+            fetchDayOneGames();
+        }
+    }, [chosenDate]);
+
+    // Day after chosen Dates - Day 2 Stats. Games after mid carousel date card.
+    useEffect(() => {
+        const chosenDate2 = new Date(chosenDate);
+        chosenDate2.setDate(chosenDate2.getDate() + 1);
+
+        const data = getCachedScoreData(chosenDate2, cachedGameData);
+        if (data) {
+            setDayTwoStats(data);
+        } else {
+            const fetchDayTwoGames = async () => {
+                try {
+                    await basketballApi
+                        .get('/games?dates[]=' + formatAPIDate(chosenDate2))
+                        .then((res: apiGamesDataType) => {
+                            res.data.data.map((item: basketballData) => {
+                                item.dateObj = false;
+                                item.status = formatTimeInET(item.status);
+                            });
+                            res.data.data.sort(gameStartTimeSort);
+                            setDayTwoStats(res.data);
+                            cachedGameData[chosenDate2.toLocaleDateString()] =
+                                res.data;
+                        });
+                } catch (err) {
+                    let message;
+                    if (err instanceof Error) message = err.message;
+                    else message;
+                    console.log(message);
+                }
+            };
+            fetchDayTwoGames();
         }
     }, [chosenDate]);
 
@@ -124,7 +124,6 @@ function App() {
                             currentGameID.toString()
                     )
                     .then((res: apiBoxscoreDataType) => {
-                        // console.log('boxscore, res', res);
                         const boxScoreData = res.data;
                         if (boxScoreData.data.length !== 0) {
                             const home_team_id =
@@ -167,6 +166,9 @@ function App() {
 
     function setGameDate(date: Date) {
         setChosenDate(date);
+        const secondDay = new Date(date);
+        secondDay.setDate(date.getDate() + 1);
+        setDayTwo(secondDay);
     }
 
     function toggleTheme() {
@@ -176,7 +178,9 @@ function App() {
         document.documentElement.style.setProperty('--background-color', color);
     }
 
-    const todayDateObj = Object.assign(emptyDateObject, { date: chosenDate });
+    // const dayTwo = new Date(chosenDate);
+    // dayTwo.setDate(chosenDate.getDate() + 1);
+    const dayTwoDateObj = Object.assign(emptyDateObject, { date: dayTwo });
     return (
         <div className="container" data-theme={theme}>
             <div className="App">
@@ -188,16 +192,16 @@ function App() {
                         />
                         <Misc theme={theme} handleClick={toggleTheme} />
                     </div>
-                    {yestStats.data && todayStats.data && (
+                    {dayOneStats.data && dayTwoStats.data && (
                         <Carousel
                             key={1}
                             // data={test.data}
                             data={[
-                                ...yestStats.data,
-                                todayDateObj,
-                                ...todayStats.data,
+                                ...dayOneStats.data,
+                                dayTwoDateObj,
+                                ...dayTwoStats.data,
                             ]}
-                            // meta={yestStats.meta}
+                            // meta={dayOneStats.meta}
                             handleClick={selectGameClick}
                         />
                     )}

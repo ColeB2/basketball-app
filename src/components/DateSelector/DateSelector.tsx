@@ -8,11 +8,12 @@ interface DateSelectorProps {
     handleClick: (date: Date) => void;
 }
 function DateSelector(props: DateSelectorProps) {
-    // Get today date constant so date doesn't change when we change
+    // Get yesterday date constant so date doesn't change when we change
     // the chosen date prop to select games.
-    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
     const dates = [...Array(7)].map((_, i) => {
-        const d = new Date(today);
+        const d = new Date(yesterday);
         d.setDate(d.getDate() - i);
         return d;
     });
