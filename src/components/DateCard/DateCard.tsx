@@ -1,22 +1,7 @@
 import { basketballData } from '../../types/basketballdata';
 import './DateCard.css';
 
-export const monthsList = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
-];
-
-export const daysList = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+import { monthsList, daysList } from '../../helpers/helperData';
 
 interface DateCardProps {
     data: basketballData;
@@ -31,13 +16,15 @@ const DateCard = ({ data }: DateCardProps) =>
                     <tr>
                         <td>
                             {typeof data.date != 'string' &&
-                                daysList[data.date.getDay()]}
+                                daysList[data.date.getDay()].toUpperCase()}
                         </td>
                     </tr>
                     <tr>
                         <td>
                             {typeof data.date != 'string' &&
-                                monthsList[data.date.getMonth()]}{' '}
+                                monthsList[
+                                    data.date.getMonth()
+                                ].toUpperCase()}{' '}
                             {typeof data.date != 'string' &&
                                 data.date.getDate()}
                         </td>

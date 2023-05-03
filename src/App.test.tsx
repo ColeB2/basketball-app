@@ -1,14 +1,20 @@
 import { describe } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import todayGameData from './tests/todayGameData';
-import yesterdayGameData from './tests/yesterdayGameData';
 import todayGameBoxscoreData from './tests/yesterdayGameBoxscoreData';
+import mockGameData from './tests/gameData/allGameData';
 import { gameStartTimeSort, minutesSort } from './helpers/helperFunctions';
 import { columns } from './components/BoxScore/BoxScore';
-import { daysList, monthsList } from './components/DateCard/DateCard';
+import { daysList, monthsList } from './helpers/helperData';
 
 import App from './App';
+
+const today = new Date();
+const yest = new Date();
+yest.setDate(yest.getDate() - 1);
+
+const yesterdayGameData = mockGameData[yest.toLocaleDateString()];
+const todayGameData = mockGameData[today.toLocaleDateString()];
 
 describe('App', () => {
     it('Renders App component', async () => {
@@ -16,8 +22,8 @@ describe('App', () => {
 
         await screen.findAllByRole('table');
         const tables = screen.getAllByRole('table');
-        // After loading we should have 15 tables;
-        // 4 today games, 1 date table/ 10 tomorrow games.
+        // Initial load should contain tables for yesterday's games, todays and
+        // 1 for the date card separating the two.
         const expectedTableLength =
             yesterdayGameData.data.length + todayGameData.data.length + 1;
         expect(tables.length).toBe(expectedTableLength);
@@ -74,8 +80,8 @@ describe('App', () => {
         const today = new Date();
         const todayMonth = monthsList[today.getMonth()];
         const todayDay = daysList[today.getDay()];
-        const expectedDate = `${todayDay}${todayMonth} ${today.getDate()}`;
-        const expectedMonthDate = `${todayMonth} ${today.getDate()}`;
+        const expectedDate = `${todayDay.toUpperCase()}${todayMonth.toUpperCase()} ${today.getDate()}`;
+        const expectedMonthDate = `${todayMonth.toUpperCase()} ${today.getDate()}`;
         expect(table.textContent).toBe(expectedDate);
 
         // Assert first row of each table is Status --> Final
@@ -83,7 +89,7 @@ describe('App', () => {
         const currentDay = rows[0].querySelector('td');
         const currentMonthDate = rows[1].querySelector('td');
         // const [currentDayRow, currentMonthDateRow] = rows;
-        expect(currentDay?.textContent).toBe(todayDay);
+        expect(currentDay?.textContent).toBe(todayDay.toUpperCase());
         expect(currentMonthDate?.textContent).toBe(expectedMonthDate);
     });
     it('Renders Today Games Properly', async () => {

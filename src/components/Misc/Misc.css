@@ -1,15 +1,3 @@
-.button-container {
-    display: inline;
-    float: left;
-
-    min-width: var(--misc-box-width);
-    min-height: 86px;
-    width: var(--misc-box-width);
-    height: var(--header-height);
-
-    background-color: var(--ticker-date-color);
-}
-
 .toggle {
     /* display: inline-flex; */
     display: flex;
@@ -19,6 +7,8 @@
     justify-content: center;
     /* border: 1px solid black;
     border-radius: 50%; */
+    margin-left: 5px;
+    margin-top: 10px;
     
 
     width: 32px;

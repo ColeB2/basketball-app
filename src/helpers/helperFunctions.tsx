@@ -1,4 +1,10 @@
-import { playerStatsDataType, basketballData } from '../types/basketballdata';
+import {
+    playerStatsDataType,
+    basketballData,
+    cachedBasketballDataType,
+    cachedBoxscoreDataType,
+} from '../types/basketballdata';
+import { daysList, monthsList } from './helperData';
 
 function minutesSort(a: playerStatsDataType, b: playerStatsDataType) {
     return parseInt(b.min) - parseInt(a.min);
@@ -37,4 +43,54 @@ function gameStartTimeSort(a: basketballData, b: basketballData) {
     return timeValueA - timeValueB;
 }
 
-export { formatTimeInET, gameStartTimeSort, minutesSort };
+function formatAPIDate(date: Date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
+function formatDropdownDate(date: Date) {
+    return `${daysList[date.getDay()]}, ${
+        monthsList[date.getMonth()]
+    } ${date.getDate()}`;
+}
+
+function getCachedScoreData(date: Date, cache: cachedBasketballDataType) {
+    if (cache[date.toLocaleDateString()]) {
+        const res = cache[date.toLocaleDateString()];
+        res.data.map((item: basketballData) => {
+            item.dateObj = false;
+            item.status = formatTimeInET(item.status);
+        });
+        return res;
+    }
+    return false;
+}
+
+function getCachedBoxscoreData(id: number, cache: cachedBoxscoreDataType) {
+    if (cache[id]) {
+        const res = cache[id];
+        return res;
+    }
+    return false;
+}
+
+function getLast7Days() {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const dates = [...Array(7)].map((_, i) => {
+        const d = new Date(yesterday);
+        d.setDate(d.getDate() - i);
+        return d;
+    });
+    return dates;
+}
+
+export {
+    formatAPIDate,
+    formatDropdownDate,
+    formatTimeInET,
+    gameStartTimeSort,
+    getCachedScoreData,
+    getCachedBoxscoreData,
+    getLast7Days,
+    minutesSort,
+};

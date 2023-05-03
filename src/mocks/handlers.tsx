@@ -1,12 +1,10 @@
 import { rest } from 'msw';
 // MOCK APIS FOR TESTING
-import YEST_API from '../tests/yesterdayGameData';
 import TODAY_API from '../tests/todayGameData';
 import BOXSCORE_API from '../tests/yesterdayGameBoxscoreData';
+import mockGameData from '../tests/gameData/allGameData';
 // TYPES
 import { boxscoreDataType } from '../types/basketballdata';
-
-const apiDateCalls: string[] = [];
 
 interface apiDataTypes {
     [key: string]: boxscoreDataType;
@@ -22,12 +20,12 @@ const boxScoreId: apiDataTypes = {
 export const restHandlers = [
     rest.get('https://www.balldontlie.io/api/v1/games', (req, res, ctx) => {
         const date: string | null = req.url.searchParams.get('dates[]');
+
         if (date) {
-            apiDateCalls.push(date);
-        }
-        // First api call will be for yesterday games, so call yest_api.
-        if (apiDateCalls[0] === date) {
-            return res(ctx.status(200), ctx.json(YEST_API));
+            const [year, month, day] = date.split('-').map(Number);
+            const dateString = new Date(year, month - 1, day);
+            const apiData = mockGameData[dateString.toLocaleDateString()];
+            return res(ctx.status(200), ctx.json(apiData));
         } else {
             return res(ctx.status(200), ctx.json(TODAY_API));
         }
