@@ -21,7 +21,6 @@ const dayData = [
     dayOne,
 ];
 const mockGameData = {} as cachedBasketballDataType;
-// console.log(dates.toLocaleString());
 
 dates.forEach((date, i) => {
     mockGameData[date.toLocaleDateString()] = dayData[i];
