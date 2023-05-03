@@ -1,14 +1,20 @@
 import { describe } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import todayGameData from './tests/todayGameData';
-import yesterdayGameData from './tests/yesterdayGameData';
 import todayGameBoxscoreData from './tests/yesterdayGameBoxscoreData';
+import mockGameData from './tests/gameData/allGameData';
 import { gameStartTimeSort, minutesSort } from './helpers/helperFunctions';
 import { columns } from './components/BoxScore/BoxScore';
 import { daysList, monthsList } from './helpers/helperData';
 
 import App from './App';
+
+const today = new Date();
+const yest = new Date();
+yest.setDate(yest.getDate() - 1);
+
+const yesterdayGameData = mockGameData[yest.toLocaleDateString()];
+const todayGameData = mockGameData[today.toLocaleDateString()];
 
 describe('App', () => {
     it('Renders App component', async () => {
@@ -16,8 +22,8 @@ describe('App', () => {
 
         await screen.findAllByRole('table');
         const tables = screen.getAllByRole('table');
-        // After loading we should have 15 tables;
-        // 4 today games, 1 date table/ 10 tomorrow games.
+        // Initial load should contain tables for yesterday's games, todays and
+        // 1 for the date card separating the two.
         const expectedTableLength =
             yesterdayGameData.data.length + todayGameData.data.length + 1;
         expect(tables.length).toBe(expectedTableLength);
