@@ -1,0 +1,16 @@
+.date-selector-container {
+    align-content: center;
+}
+.date-selector {
+    background-color: var(--date-selector-color);
+    /* color: var(--table-color-secondary); */
+    text-align: left;
+    /* align-self: center; */
+    margin-top: 4px;
+    margin-left: 10px;
+    padding: 4px 2px;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+}

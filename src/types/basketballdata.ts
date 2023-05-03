@@ -87,6 +87,10 @@ interface basketballDataType {
     // meta: object;
 }
 
+interface cachedBasketballDataType {
+    [dateString: string]: basketballDataType;
+}
+
 interface boxscoreDataType {
     data: playerStatsDataType[];
 }
@@ -94,6 +98,10 @@ interface boxscoreDataType {
 interface gameDataType {
     home_team: playerStatsDataType[];
     away_team: playerStatsDataType[];
+}
+
+interface cachedBoxscoreDataType {
+    [idNumber: number]: gameDataType;
 }
 
 interface apiGamesDataType {
@@ -120,6 +128,8 @@ export type {
     basketballDataType,
     basketballData,
     boxscoreDataType,
+    cachedBasketballDataType,
+    cachedBoxscoreDataType,
     gameDataType,
     gameStatsDataType,
     playerStatsDataType,
