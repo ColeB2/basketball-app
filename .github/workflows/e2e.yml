@@ -1,5 +1,8 @@
 name: End-to-end tests With server
-on: push
+on:
+  push:
+    branches:
+      - dev
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04

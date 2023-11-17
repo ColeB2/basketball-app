@@ -12,7 +12,7 @@ export const dayEight = {
                 full_name: 'Miami Heat',
                 name: 'Heat',
             },
-            home_team_score: 0,
+            home_team_score: 100,
             period: 0,
             postseason: false,
             season: 2022,

@@ -1,16 +1,37 @@
 .date-selector-container {
-    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-top: 4px;
+}
+.date-display {
+    background-color: var(--date-selector-color);
+    color: black;
+    text-align: left;
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 4px;
 }
 .date-selector {
     background-color: var(--date-selector-color);
-    /* color: var(--table-color-secondary); */
-    text-align: left;
-    /* align-self: center; */
-    margin-top: 4px;
-    margin-left: 10px;
-    padding: 4px 2px;
-    width: 80%;
+    margin-left: 4px;
+    padding: 4px;
     border: 1px solid black;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.date-selector::-webkit-datetime-edit, 
+.date-selector::-webkit-inner-spin-button, 
+.date-selector::-webkit-clear-button {
+    display: none;
+}
+.date-selector:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.date-selector::-webkit-calendar-picker-indicator,
+.date-selector::-webkit-inner-spin-button {
     cursor: pointer;
 }
