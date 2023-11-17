@@ -165,6 +165,7 @@ function App() {
     }
 
     function setGameDate(date: Date) {
+        console.log('old', date);
         setChosenDate(date);
         const secondDay = new Date(date);
         secondDay.setDate(date.getDate() + 1);
