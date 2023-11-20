@@ -15,7 +15,9 @@ function DateSelector(props: DateSelectorProps) {
             <input
                 className="date-selector"
                 type="date"
-                onChange={(e) => props.handleClick(new Date(e.target.value))}
+                onChange={(e) =>
+                    props.handleClick(new Date(e.target.value + 'T00:01'))
+                }
                 value={props.date ? props.date.toISOString().split('T')[0] : ''}
             />
         </div>
