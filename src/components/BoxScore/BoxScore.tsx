@@ -36,21 +36,39 @@ export const columns = [
     { label: 'PF', accessor: 'pf' },
 ];
 
-const BoxScore = (props: BoxScoreProps) => {
+const renderPlayerData = (item: any, { accessor, accessor2 }: any) => {
+    const tdata = item.player[accessor] || '---';
+    const tdata2 = item.player[accessor2] || '---';
     return (
-        props &&
-        props.data.keys && (
+        <td key={accessor} className={'player'}>
+            {`${tdata.replace(/\b(\w)\w+/g, '$1.')} ${tdata2}`}
+        </td>
+    );
+};
+
+const renderRegularData = (item: any, { accessor, rate }: any) => {
+    const tdata = rate
+        ? (item[accessor] * 100).toFixed(1)
+        : item[accessor] || '0';
+    return (
+        <td key={accessor} className={accessor}>
+            {tdata}
+        </td>
+    );
+};
+
+const BoxScore = (props: BoxScoreProps) => {
+    const { data } = props;
+    return (
+        data &&
+        data.keys && (
             <div className="boxscore-container">
-                <h1 className="boxscore-title">
-                    {props.data[0].team.full_name}
-                </h1>
+                <h1 className="boxscore-title">{data[0].team.full_name}</h1>
                 <div className="boxscore-table-div">
                     <table className="boxscore-table boxscore-table-hover">
                         <thead>
                             <tr>
-                                <th className="player">
-                                    {props.data[0].team.city}
-                                </th>
+                                <th className="player">{data[0].team.city}</th>
                                 {columns.map(({ label, accessor, player }) => {
                                     if (player) {
                                         return;
@@ -66,7 +84,10 @@ const BoxScore = (props: BoxScoreProps) => {
                         <tbody>
                             {/* Fix */}
                             {/* eslint-disable-next-line */}
-                        {props.data.map((item: any, idx: number) => {
+                        {data.map((item: any) => {
+                                if (!item.player) {
+                                    return null;
+                                }
                                 return (
                                     <tr key={item.id}>
                                         {columns.map(
@@ -77,54 +98,21 @@ const BoxScore = (props: BoxScoreProps) => {
                                                 rate,
                                             }) => {
                                                 // Handles information held in item.player instead of item.
-                                                if (player) {
-                                                    const tdata = item.player[
-                                                        accessor
-                                                    ]
-                                                        ? item.player[accessor]
-                                                        : '---';
-                                                    const tdata2 = item.player[
-                                                        accessor2
-                                                    ]
-                                                        ? item.player[accessor2]
-                                                        : '---';
-                                                    return (
-                                                        // Regex to shorten name
-                                                        <td
-                                                            key={accessor}
-                                                            className={'player'}
-                                                        >{`${tdata.replace(
-                                                            /\b(\w)\w+/g,
-                                                            '$1.'
-                                                        )} ${tdata2}`}</td>
+                                                if (player && item.player) {
+                                                    return renderPlayerData(
+                                                        item,
+                                                        {
+                                                            accessor,
+                                                            accessor2,
+                                                        }
                                                     );
-                                                } else if (rate) {
-                                                    const tdata = item[accessor]
-                                                        ? (
-                                                              item[accessor] *
-                                                              100
-                                                          ).toFixed(1)
-                                                        : '0.0';
-                                                    return (
-                                                        <td
-                                                            key={accessor}
-                                                            className={accessor}
-                                                        >
-                                                            {tdata}
-                                                        </td>
-                                                    );
-                                                    // Handles all other values.
                                                 } else {
-                                                    const tdata = item[accessor]
-                                                        ? item[accessor]
-                                                        : '0';
-                                                    return (
-                                                        <td
-                                                            key={accessor}
-                                                            className={accessor}
-                                                        >
-                                                            {tdata}
-                                                        </td>
+                                                    return renderRegularData(
+                                                        item,
+                                                        {
+                                                            accessor,
+                                                            rate,
+                                                        }
                                                     );
                                                 }
                                             }
